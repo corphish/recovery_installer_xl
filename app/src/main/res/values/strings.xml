@@ -7,4 +7,6 @@
     <string name="cwm_head">CWM Philz Touch Recovery</string>
     <string name="install">INSTALL</string>
     <string name="not_installed">Not Installed</string>
+    <string name="installed">Installed</string>
+    <string name="installing">Installing</string>
 </resources>
