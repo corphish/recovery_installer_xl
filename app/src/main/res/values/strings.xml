@@ -6,4 +6,5 @@
     <string name="twrp_head">TeamWin Recovery Project</string>
     <string name="cwm_head">CWM Philz Touch Recovery</string>
     <string name="install">INSTALL</string>
+    <string name="not_installed">Not Installed</string>
 </resources>
