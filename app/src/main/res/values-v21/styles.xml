@@ -3,8 +3,6 @@
         <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
             <item name="colorPrimary">@color/primary</item>
             <item name="colorPrimaryDark">@color/primary_dark</item>
-            <item name="android:windowNoTitle">true</item>
-            <item name="windowActionBar">false</item>
             <item name="colorAccent">@color/primary_dark</item>
             <item name="android:navigationBarColor">@color/primary</item>
         </style>
