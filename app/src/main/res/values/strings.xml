@@ -4,5 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="twrp_head">TeamWin Recovery Project</string>
+    <string name="cwm_head">CWM Philz Touch Recovery</string>
     <string name="install">INSTALL</string>
 </resources>
