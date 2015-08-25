@@ -11,7 +11,7 @@
         android:id="@+id/card_view_twrp"
         android:layout_gravity="center"
         android:elevation="4dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true" >
