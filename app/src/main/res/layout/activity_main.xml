@@ -36,11 +36,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/unknown"
+            android:id="@+id/twrp_version"
+            android:textSize="11sp"
+            android:paddingLeft="90dp"
+            android:paddingTop="65dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/not_installed"
             android:id="@+id/twrp_status"
             android:textSize="12sp"
-            android:paddingLeft="90dp"
-            android:paddingTop="60dp"
+            android:paddingStart="200dp"
+            android:paddingRight="10dp"
+            android:gravity="right"
+            android:paddingTop="65dp"
             android:textStyle="italic"/>
 
     </android.support.v7.widget.CardView>
@@ -75,11 +86,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/unknown"
+            android:id="@+id/cwm_version"
+            android:textSize="11sp"
+            android:paddingLeft="90dp"
+            android:paddingTop="65dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/not_installed"
             android:id="@+id/cwm_status"
             android:textSize="12sp"
-            android:paddingLeft="90dp"
-            android:paddingTop="60dp"
+            android:paddingStart="200dp"
+            android:paddingRight="10dp"
+            android:gravity="right"
+            android:paddingTop="65dp"
             android:textStyle="italic"/>
 
     </android.support.v7.widget.CardView>
