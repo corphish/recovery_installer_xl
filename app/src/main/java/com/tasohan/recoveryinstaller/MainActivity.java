@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -25,6 +26,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkDevice();
         checkRootAccess();
         getRecoveryVers();
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
@@ -153,6 +155,27 @@ public class MainActivity extends Activity {
 
         }
 
+    }
+
+    public void checkDevice () {
+        String dev = Build.MODEL;
+        if(dev.equals(getResources().getString(R.string.model_1)) || dev.equals(getResources().getString(R.string.model_2)) || dev.equals(getResources().getString(R.string.model_3))) {
+            //compatible device found.
+        } else {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+            builder1.setTitle(getResources().getString(R.string.no_device));
+            builder1.setMessage(getResources().getString(R.string.no_device_desc));
+            builder1.setCancelable(false);
+            builder1.setPositiveButton(getResources().getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            finish();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
     }
 
 
