@@ -14,4 +14,7 @@
     <string name="error">Error</string>
     <string name="downloading">Downloading</string>
     <string name="update">Update Available!</string>
+    <string name="cot_head">Cannibal Open Touch Recovery</string>
+    <string name="cm_head">Cyanogen Recovery</string>
+    <string name="stock_head">Stock FOTAKernel</string>
 </resources>

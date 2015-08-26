@@ -25,9 +25,18 @@ public class MainActivity extends Activity {
         final TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
         CardView card_cwm = (CardView)findViewById(R.id.card_view_cwm);
         final TextView cwm_status = (TextView)findViewById(R.id.cwm_status);
+        CardView card_cot = (CardView)findViewById(R.id.card_view_cot);
+        final TextView cot_status = (TextView)findViewById(R.id.cot_status);
+        CardView card_cm = (CardView)findViewById(R.id.card_view_cm);
+        final TextView cm_status = (TextView)findViewById(R.id.cm_status);
+        CardView card_stock = (CardView)findViewById(R.id.card_view_stock);
+        final TextView stock_status = (TextView)findViewById(R.id.stock_status);
         final SharedPreferences.Editor editor = getSharedPreferences("recovery", MODE_PRIVATE).edit();
         final TextView twrp_ver = (TextView)findViewById(R.id.twrp_version);
         final TextView cwm_ver = (TextView)findViewById(R.id.cwm_version);
+        final TextView cot_ver = (TextView)findViewById(R.id.cot_version);
+        final TextView cm_ver = (TextView)findViewById(R.id.cm_version);
+        final TextView stock_ver = (TextView)findViewById(R.id.stock_version);
         card_twrp.setClickable(true);
         card_twrp.setLongClickable(true);
         card_twrp.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +53,30 @@ public class MainActivity extends Activity {
                 new DownloadTask(MainActivity.this,cwm_status,"philz", editor, cwm_ver.getText().toString()).execute("");
             }
         });
+        card_cot.setClickable(true);
+        card_cot.setLongClickable(true);
+        card_cot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DownloadTask(MainActivity.this,cot_status,"cot", editor, cot_ver.getText().toString()).execute("");
+            }
+        });
+        card_cm.setClickable(true);
+        card_cm.setLongClickable(true);
+        card_cm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DownloadTask(MainActivity.this,cm_status,"cm", editor, cm_ver.getText().toString()).execute("");
+            }
+        });
+        card_stock.setClickable(true);
+        card_stock.setLongClickable(true);
+        card_stock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DownloadTask(MainActivity.this,stock_status,"stock", editor, stock_ver.getText().toString()).execute("");
+            }
+        });
     }
 
 
@@ -51,11 +84,20 @@ public class MainActivity extends Activity {
     public void getRecoveryVers () {
         TextView twrp_ver = (TextView)findViewById(R.id.twrp_version);
         TextView cwm_ver = (TextView)findViewById(R.id.cwm_version);
+        TextView cot_ver = (TextView)findViewById(R.id.cot_version);
+        TextView cm_ver = (TextView)findViewById(R.id.cm_version);
+        TextView stock_ver = (TextView)findViewById(R.id.stock_version);
         SharedPreferences pref = getSharedPreferences("recovery", MODE_PRIVATE);
         TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
         TextView cwm_status = (TextView)findViewById(R.id.cwm_status);
+        TextView cot_status = (TextView)findViewById(R.id.cot_status);
+        TextView cm_status = (TextView)findViewById(R.id.cm_status);
+        TextView stock_status = (TextView)findViewById(R.id.stock_status);
         new GetRecoveryVersion(MainActivity.this,twrp_ver, twrp_status ,"twrp", pref).execute("");
         new GetRecoveryVersion(MainActivity.this,cwm_ver, cwm_status ,"philz", pref).execute("");
+        new GetRecoveryVersion(MainActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
+        new GetRecoveryVersion(MainActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
+        new GetRecoveryVersion(MainActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
     }
 
 
