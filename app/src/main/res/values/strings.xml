@@ -10,5 +10,6 @@
     <string name="installed">Installed</string>
     <string name="installing">Installing</string>
     <string name="unknown">Unknown</string>
-    <string name="fetch_version">Getting Latest Version...</string>
+    <string name="fetch_version">Loading...</string>
+    <string name="error">Error</string>
 </resources>
