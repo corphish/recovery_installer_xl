@@ -24,13 +24,15 @@ public class DownloadFile extends AsyncTask<String, Integer, String> {
     String s_url;
     String recovery;
     private SharedPreferences.Editor pref;
+    String ver;
 
-    public DownloadFile(Context context, TextView t, String s, String rec, SharedPreferences.Editor sharedPref) {
+    public DownloadFile(Context context, TextView t, String s, String rec, SharedPreferences.Editor sharedPref, String v) {
         mContext = context;
         status = t;
         s_url = s;
         recovery = rec;
         pref = sharedPref;
+        ver = v;
     }
 
     protected void onPreExecute() {
@@ -113,7 +115,7 @@ public class DownloadFile extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         if(result != null)
-            new FlashRecovery(mContext, status, recovery,pref).execute("");
+            new FlashRecovery(mContext, status, recovery,pref, ver).execute("");
         else {
             status.setTextColor(mContext.getResources().getColor(R.color.red));
             status.setText(mContext.getResources().getString(R.string.error));

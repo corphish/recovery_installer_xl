@@ -28,12 +28,14 @@ public class DownloadTask  extends AsyncTask<String, Integer, String> {
     TextView version;
     String recovery;
     private SharedPreferences.Editor pref;
+    String ver;
 
-    public DownloadTask(Context context,TextView textView_version, String rec, SharedPreferences.Editor sharedPref) {
+    public DownloadTask(Context context,TextView textView_version, String rec, SharedPreferences.Editor sharedPref, String v) {
         mContext = context;
         version = textView_version;
         recovery = rec;
         pref = sharedPref;
+        ver = v;
     }
 
     protected void onPreExecute() {
@@ -94,7 +96,7 @@ public class DownloadTask  extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         if(result != null) {
-            new DownloadFile(mContext,version,result,recovery,pref).execute("");
+            new DownloadFile(mContext,version,result,recovery,pref,ver).execute("");
         } else {
             version.setText(mContext.getResources().getString(R.string.error));
             version.setTextColor(mContext.getResources().getColor(R.color.red));

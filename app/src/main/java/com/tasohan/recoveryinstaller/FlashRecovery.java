@@ -17,12 +17,14 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
     private SharedPreferences.Editor pref;
     private Context c;
     String rc;
+    String ver;
 
-    public FlashRecovery(Context context, TextView textView, String Recovery, SharedPreferences.Editor sharedPref) {
+    public FlashRecovery(Context context, TextView textView, String Recovery, SharedPreferences.Editor sharedPref, String v) {
         c = context;
         status = textView;
         pref = sharedPref;
         rc = Recovery;
+        ver = v;
     }
 
     protected void onPreExecute() {
@@ -68,6 +70,7 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
         status.setText(c.getResources().getString(R.string.installed));
         status.setTextColor(c.getResources().getColor(R.color.green));
         pref.putString("recovery", rc);
+        pref.putString("version",ver);
         pref.commit();
     }
 }
