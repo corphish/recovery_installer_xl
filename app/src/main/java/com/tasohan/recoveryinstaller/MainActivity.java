@@ -1,6 +1,8 @@
 package com.tasohan.recoveryinstaller;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -11,6 +13,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 
 public class MainActivity extends Activity {
 
@@ -20,6 +25,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkRootAccess();
         getRecoveryVers();
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
         final TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
@@ -98,6 +104,55 @@ public class MainActivity extends Activity {
         new GetRecoveryVersion(MainActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
         new GetRecoveryVersion(MainActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
         new GetRecoveryVersion(MainActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
+    }
+
+    public void checkRootAccess () {
+        Runtime runtime = Runtime.getRuntime();
+        Process proc = null;
+        OutputStreamWriter osw = null;
+
+        try {
+            proc = runtime.exec("su");
+            osw = new OutputStreamWriter(proc.getOutputStream());
+
+        } catch (IOException ex) {
+            Log.e("execCommandLine()", "Command resulted in an IO Exception: ");
+
+            finish();
+            return;
+        } finally {
+            if (osw != null) {
+                try {
+                    osw.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+
+        try {
+            proc.waitFor();
+        } catch (InterruptedException e) {
+        }
+
+        if (proc.exitValue() != 0) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+            builder1.setTitle(getResources().getString(R.string.no_root));
+            builder1.setMessage(getResources().getString(R.string.no_root_desc));
+            builder1.setCancelable(false);
+            builder1.setPositiveButton(getResources().getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            finish();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }  else {
+            //Toast.makeText(this, "Root Access Granted", Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 
 

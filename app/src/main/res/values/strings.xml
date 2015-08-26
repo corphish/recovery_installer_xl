@@ -12,9 +12,13 @@
     <string name="unknown">Unknown</string>
     <string name="fetch_version">Loading...</string>
     <string name="error">Error</string>
+    <string name="reboot">Rebooting..</string>
     <string name="downloading">Downloading</string>
     <string name="update">Update Available!</string>
     <string name="cot_head">Cannibal Open Touch Recovery</string>
     <string name="cm_head">Cyanogen Recovery</string>
     <string name="stock_head">Stock FOTAKernel</string>
+    <string name="no_root">No Root Access</string>
+    <string name="no_root_desc">The App could not acquire root access, which is necessary for this app to function properly. Please grant root access and restart app.</string>
+    <string name="ok">OK</string>
 </resources>

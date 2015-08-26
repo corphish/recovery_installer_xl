@@ -67,8 +67,8 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        status.setText(c.getResources().getString(R.string.installed));
-        status.setTextColor(c.getResources().getColor(R.color.green));
+        status.setText(c.getResources().getString(R.string.reboot));
+        status.setTextColor(c.getResources().getColor(R.color.red));
         pref.putString("recovery", rc);
         pref.putString("version",ver);
         pref.commit();
