@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getInstalledRecovery();
+        getRecoveryVers();
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
         final TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
         CardView card_cwm = (CardView)findViewById(R.id.card_view_cwm);
@@ -57,6 +58,13 @@ public class MainActivity extends Activity {
             cwm_status.setText(getResources().getString(R.string.installed));
             cwm_status.setTextColor(getResources().getColor(R.color.green));
         }
+    }
+
+    public void getRecoveryVers () {
+        TextView twrp_ver = (TextView)findViewById(R.id.twrp_version);
+        TextView cwm_ver = (TextView)findViewById(R.id.cwm_version);
+        new GetRecoveryVersion(MainActivity.this,twrp_ver ,"twrp").execute("");
+        new GetRecoveryVersion(MainActivity.this,cwm_ver ,"philz").execute("");
     }
 
     @Override
