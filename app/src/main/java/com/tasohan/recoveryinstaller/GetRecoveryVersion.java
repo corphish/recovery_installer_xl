@@ -1,6 +1,7 @@
 package com.tasohan.recoveryinstaller;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
@@ -27,18 +28,24 @@ public class GetRecoveryVersion extends AsyncTask<String, Integer, String> {
 
     Context mContext;
     TextView version;
+    TextView status;
     String recovery;
+    SharedPreferences pref;
 
-    public GetRecoveryVersion(Context context,TextView textView_version, String rec) {
+    public GetRecoveryVersion(Context context,TextView textView_version, TextView textView_status, String rec, SharedPreferences p) {
         mContext = context;
         version = textView_version;
+        status = textView_status;
         recovery = rec;
+        pref = p;
     }
 
     protected void onPreExecute() {
         super.onPreExecute();
         version.setText(mContext.getResources().getString(R.string.fetch_version));
+        status.setText(mContext.getResources().getString(R.string.fetch_version));
         version.setTextColor(mContext.getResources().getColor(R.color.grey));
+        status.setTextColor(mContext.getResources().getColor(R.color.grey));
     }
 
     @Override
@@ -98,6 +105,19 @@ public class GetRecoveryVersion extends AsyncTask<String, Integer, String> {
         } else {
             version.setText(mContext.getResources().getString(R.string.error));
             version.setTextColor(mContext.getResources().getColor(R.color.red));
+        }
+
+        if(pref.getString("recovery","").equals(recovery)) {
+            status.setText(mContext.getResources().getString(R.string.installed));
+            status.setTextColor(mContext.getResources().getColor(R.color.green));
+            if(!pref.getString("version","").equals(result) && result != null) {
+                status.setText(mContext.getResources().getString(R.string.update));
+                status.setTextColor(mContext.getResources().getColor(R.color.blue));
+            }
+        } else {
+
+            status.setText(mContext.getResources().getString(R.string.not_installed));
+            status.setTextColor(mContext.getResources().getColor(R.color.grey));
         }
     }
 }
