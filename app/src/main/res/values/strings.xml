@@ -12,4 +12,5 @@
     <string name="unknown">Unknown</string>
     <string name="fetch_version">Loading...</string>
     <string name="error">Error</string>
+    <string name="downloading">Downloading</string>
 </resources>

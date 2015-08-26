@@ -29,9 +29,7 @@ public class MainActivity extends Activity {
         card_twrp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                twrp_status.setText(getResources().getString(R.string.installing));
-                twrp_status.setTextColor(getResources().getColor(R.color.black));
-                new FlashRecovery(MainActivity.this, twrp_status, "twrp", editor).execute("");
+                new DownloadTask(MainActivity.this,twrp_status,"twrp", editor).execute("");
             }
         });
         card_cwm.setClickable(true);
@@ -39,9 +37,7 @@ public class MainActivity extends Activity {
         card_cwm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cwm_status.setText(getResources().getString(R.string.installing));
-                cwm_status.setTextColor(getResources().getColor(R.color.black));
-                new FlashRecovery(MainActivity.this, twrp_status, "philz", editor).execute("");
+                new DownloadTask(MainActivity.this,cwm_status,"philz", editor).execute("");
             }
         });
     }
