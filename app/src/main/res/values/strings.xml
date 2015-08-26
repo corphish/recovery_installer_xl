@@ -13,4 +13,5 @@
     <string name="fetch_version">Loading...</string>
     <string name="error">Error</string>
     <string name="downloading">Downloading</string>
+    <string name="update">Update Available!</string>
 </resources>
