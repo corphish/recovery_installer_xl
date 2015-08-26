@@ -25,6 +25,12 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
         rc = Recovery;
     }
 
+    protected void onPreExecute() {
+        super.onPreExecute();
+        status.setText(c.getResources().getString(R.string.installing));
+        status.setTextColor(c.getResources().getColor(R.color.grey));
+    }
+
     @Override
     protected String doInBackground(String... sUrl) {
         final Runtime runtime = Runtime.getRuntime();
