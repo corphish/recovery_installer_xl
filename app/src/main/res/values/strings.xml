@@ -9,4 +9,6 @@
     <string name="not_installed">Not Installed</string>
     <string name="installed">Installed</string>
     <string name="installing">Installing</string>
+    <string name="unknown">Unknown</string>
+    <string name="fetch_version">Unknown</string>
 </resources>
