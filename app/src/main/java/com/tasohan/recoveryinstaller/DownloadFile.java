@@ -66,7 +66,11 @@ public class DownloadFile extends AsyncTask<String, Integer, String> {
             Log.i("Download:", "Length" + fileLength);
             // download the file
             InputStream input = new BufferedInputStream(url.openStream());
-            OutputStream output = new FileOutputStream("/sdcard/fota" + recovery + ".img");
+            OutputStream output;
+            if(!recovery.equals("aromafm"))
+                output = new FileOutputStream("/sdcard/fota" + recovery + ".img");
+            else
+                output = new FileOutputStream("/sdcard/aromafm.zip");
             Log.i("Download:", "Started");
             byte data[] = new byte[4096];
             long total = 0;

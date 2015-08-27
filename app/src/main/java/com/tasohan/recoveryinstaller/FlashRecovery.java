@@ -37,9 +37,23 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String... sUrl) {
         final Runtime runtime = Runtime.getRuntime();
         Process proc = null;
-        String cmds[] = {"su",
-                "dd if=sdcard/fota" + rc + ".img of=/dev/block/platform/msm_sdcc.1/by-name/FOTAKernel",
-        };
+        String cmds[];
+        if(rc.equals("aromafm")) {
+            String cmd[] = {"su",
+                        "mkdir -p /cache/recovery/",
+                        "rm -f /cache/recovery/command",
+                        "rm -f /cache/recovery/extendedcommand",
+                        "echo 'boot-recovery' >> /cache/recovery/command",
+                        "echo '--update_package=/sdcard/aromafm.zip' >> /cache/recovery/command",
+                         };
+            cmds = cmd;
+        }
+        else {
+            String cmd[] = {"su",
+                    "dd if=sdcard/fota" + rc + ".img of=/dev/block/platform/msm_sdcc.1/by-name/FOTAKernel",
+            };
+            cmds = cmd;
+        }
         try {
             proc = runtime.exec("su");
             DataOutputStream os = new DataOutputStream(proc.getOutputStream());
