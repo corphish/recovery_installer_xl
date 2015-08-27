@@ -195,7 +195,19 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+            builder1.setTitle(getResources().getString(R.string.action_about));
+            builder1.setMessage("App Version - 1.0\nRecover Maintainer - Michael Di\nApp Maintainer - Avinaba Dalal");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(getResources().getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
             return true;
         }
 
