@@ -18,6 +18,7 @@
     <string name="cot_head">Cannibal Open Touch Recovery</string>
     <string name="cm_head">Cyanogen Recovery</string>
     <string name="stock_head">Stock FOTAKernel</string>
+    <string name="aroma_head">AROMA File Manager</string>
     <string name="no_root">No Root Access</string>
     <string name="no_root_desc">The App could not acquire root access, which is necessary for this app to function properly. Please grant root access and restart app.</string>
     <string name="ok">OK</string>
@@ -26,4 +27,6 @@
     <string name="model_3">SH36</string>
     <string name="no_device">Incompatible Device</string>
     <string name="no_device_desc">This app is only for Sony Xperia L. Please don\'t use this app if you are on some other device.</string>
+    <string name="section_recovery">RECOVERY</string>
+    <string name="section_utility">UTILITIES</string>
 </resources>
