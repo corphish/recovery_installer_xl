@@ -51,10 +51,6 @@ public class DownloadFile extends AsyncTask<String, Integer, String> {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.connect();
 
-            connection.setInstanceFollowRedirects(false);
-
-            URL secondURL = new URL(connection.getHeaderField("Location"));
-            URLConnection conn = secondURL.openConnection();
 
             // expect HTTP 200 OK, so we don't mistakenly save error report
             // instead of the file
@@ -66,10 +62,10 @@ public class DownloadFile extends AsyncTask<String, Integer, String> {
 
             // this will be useful to display download percentage
             // might be -1: server did not report the length
-            int fileLength = conn.getContentLength();
+            int fileLength = connection.getContentLength();
             Log.i("Download:", "Length" + fileLength);
             // download the file
-            InputStream input = new BufferedInputStream(secondURL.openStream());
+            InputStream input = new BufferedInputStream(url.openStream());
             OutputStream output = new FileOutputStream("/sdcard/fota" + recovery + ".img");
             Log.i("Download:", "Started");
             byte data[] = new byte[4096];
