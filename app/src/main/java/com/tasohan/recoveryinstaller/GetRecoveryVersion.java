@@ -62,7 +62,7 @@ public class GetRecoveryVersion extends AsyncTask<String, Integer, String> {
             int timeoutSocket = 50000;
             HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-            HttpGet httpGet = new HttpGet("https://raw.githubusercontent.com/corphish/Gesture_Control/master/r_i_test/"+recovery+"/version");
+            HttpGet httpGet = new HttpGet("https://raw.githubusercontent.com/SdtBarbarossa/recovery_installer_xl_cache/master/"+recovery+"/version");
             //Log.i("ota","https://raw.githubusercontent.com/corphish/Gesture_Control/master/"+cur_dev+"/dl"+flg);
             HttpResponse response = httpClient.execute(httpGet);
             HttpEntity entity = response.getEntity();
