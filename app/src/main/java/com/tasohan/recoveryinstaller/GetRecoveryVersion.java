@@ -100,11 +100,20 @@ public class GetRecoveryVersion extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         if(result != null) {
+            SharedPreferences.Editor ed = mContext.getSharedPreferences("local_recovery",Context.MODE_PRIVATE).edit();
+            ed.putString(recovery,result);
+            ed.commit();
             version.setText(result);
             version.setTextColor(mContext.getResources().getColor(R.color.black));
         } else {
-            version.setText(mContext.getResources().getString(R.string.error));
-            version.setTextColor(mContext.getResources().getColor(R.color.red));
+            SharedPreferences preferences = mContext.getSharedPreferences("local_recovery", Context.MODE_PRIVATE);
+            if (!preferences.getString(recovery, "").equals("")) {
+                version.setText(preferences.getString(recovery, ""));
+
+            } else {
+                version.setText(mContext.getResources().getString(R.string.error));
+                version.setTextColor(mContext.getResources().getColor(R.color.red));
+        }
         }
 
         if(pref.getString("recovery","").equals(recovery)) {
