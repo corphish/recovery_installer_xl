@@ -25,6 +25,7 @@
     <string name="model_1">C2104</string>
     <string name="model_2">C2105</string>
     <string name="model_3">SH36</string>
+    <string name="model_4">taoshan</string>
     <string name="no_device">Incompatible Device</string>
     <string name="no_device_desc">This app is only for Sony Xperia L. Please don\'t use this app if you are on some other device.</string>
     <string name="section_recovery">RECOVERY</string>

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Menu;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
 
 
@@ -175,7 +176,7 @@ public class MainActivity extends Activity {
 
     public void checkDevice () {
         String dev = Build.MODEL;
-        if(dev.equals(getResources().getString(R.string.model_1)) || dev.equals(getResources().getString(R.string.model_2)) || dev.equals(getResources().getString(R.string.model_3))) {
+        if(dev.equals(getResources().getString(R.string.model_1)) || dev.equals(getResources().getString(R.string.model_2)) || dev.equals(getResources().getString(R.string.model_3)) || dev.toLowerCase().equals(getResources().getString(R.string.model_4))) {
             //compatible device found.
         } else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
