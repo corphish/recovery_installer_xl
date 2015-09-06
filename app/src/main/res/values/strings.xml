@@ -30,4 +30,8 @@
     <string name="no_device_desc">This app is only for Sony Xperia L. Please don\'t use this app if you are on some other device.</string>
     <string name="section_recovery">RECOVERY</string>
     <string name="section_utility">UTILITIES</string>
+    <string name="section_beta">BETA TESTING</string>
+    <string name="no_beta">no test atm</string>
+    <string name="no_beta_desc">No Beta Version Available</string>
+    <string name="beta_desc">Beta Version Available</string>
 </resources>

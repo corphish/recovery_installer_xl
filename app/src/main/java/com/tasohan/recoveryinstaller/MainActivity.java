@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 
@@ -42,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView stock_status = (TextView)findViewById(R.id.stock_status);
         CardView card_aroma = (CardView)findViewById(R.id.card_view_aroma);
         final TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
+        final CardView card_beta = (CardView)findViewById(R.id.card_view_beta);
+        final TextView beta_status = (TextView)findViewById(R.id.beta_status);
         final SharedPreferences.Editor editor = getSharedPreferences("recovery", MODE_PRIVATE).edit();
         final SharedPreferences.Editor editor_aroma = getSharedPreferences("aroma", MODE_PRIVATE).edit();
         final TextView twrp_ver = (TextView)findViewById(R.id.twrp_version);
@@ -50,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
         final TextView cm_ver = (TextView)findViewById(R.id.cm_version);
         final TextView stock_ver = (TextView)findViewById(R.id.stock_version);
         final TextView aroma_ver = (TextView)findViewById(R.id.aroma_version);
+        final TextView beta_ver = (TextView)findViewById(R.id.beta_version);
         card_twrp.setClickable(true);
         card_twrp.setLongClickable(true);
         card_twrp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this,twrp_status,"twrp", editor, twrp_ver.getText().toString()).execute("");
+                new DownloadTask(MainActivity.this, twrp_status, "twrp", editor, twrp_ver.getText().toString()).execute("");
+
             }
         });
         card_cwm.setClickable(true);
@@ -63,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         card_cwm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this,cwm_status,"philz", editor, cwm_ver.getText().toString()).execute("");
+                new DownloadTask(MainActivity.this, cwm_status, "philz", editor, cwm_ver.getText().toString()).execute("");
             }
         });
         card_cot.setClickable(true);
@@ -71,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         card_cot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this,cot_status,"cot", editor, cot_ver.getText().toString()).execute("");
+                new DownloadTask(MainActivity.this, cot_status, "cot", editor, cot_ver.getText().toString()).execute("");
             }
         });
         card_cm.setClickable(true);
@@ -79,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         card_cm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this,cm_status,"cm", editor, cm_ver.getText().toString()).execute("");
+                new DownloadTask(MainActivity.this, cm_status, "cm", editor, cm_ver.getText().toString()).execute("");
             }
         });
         card_stock.setClickable(true);
@@ -87,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         card_stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this,stock_status,"stock", editor, stock_ver.getText().toString()).execute("");
+                new DownloadTask(MainActivity.this, stock_status, "stock", editor, stock_ver.getText().toString()).execute("");
             }
         });
         card_aroma.setClickable(true);
@@ -95,7 +104,18 @@ public class MainActivity extends AppCompatActivity {
         card_aroma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this,aroma_status,"aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
+                new DownloadTask(MainActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
+            }
+        });
+        card_beta.setClickable(true);
+        card_beta.setLongClickable(true);
+        final TextView beta_name = (TextView)findViewById(R.id.textView_beta_head);
+        final TextView beta_head = (TextView)findViewById(R.id.textView_section_beta);
+        final View view = (View)findViewById(R.id.view_section_beta);
+        card_beta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DownloadTask(MainActivity.this,beta_status,"beta", null, "").execute("");
             }
         });
     }
@@ -117,6 +137,13 @@ public class MainActivity extends AppCompatActivity {
         TextView cm_status = (TextView)findViewById(R.id.cm_status);
         TextView stock_status = (TextView)findViewById(R.id.stock_status);
         TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
+        final TextView beta_name = (TextView)findViewById(R.id.textView_beta_head);
+        final TextView beta_head = (TextView)findViewById(R.id.textView_section_beta);
+        final View view = (View)findViewById(R.id.view_section_beta);
+        final CardView card_beta = (CardView)findViewById(R.id.card_view_beta);
+        final TextView beta_status = (TextView)findViewById(R.id.beta_status);
+        final TextView beta_ver = (TextView)findViewById(R.id.beta_version);
+        new GetBetaName(MainActivity.this, card_beta, view, beta_head, beta_name, beta_ver, beta_status).execute("");
         new GetRecoveryVersion(MainActivity.this,twrp_ver, twrp_status ,"twrp", pref).execute("");
         new GetRecoveryVersion(MainActivity.this,cwm_ver, cwm_status ,"philz", pref).execute("");
         new GetRecoveryVersion(MainActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
@@ -197,6 +224,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -215,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_about) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
             builder1.setTitle(getResources().getString(R.string.action_about));
-            builder1.setMessage("App Version - 1.0\nRecover Maintainer - Michael Di\nApp Maintainer - Avinaba Dalal");
+            builder1.setMessage("App Version - 1.1\nRecovery Maintainer - Michael Di\nApp Maintainer - Avinaba Dalal");
             builder1.setCancelable(true);
             builder1.setPositiveButton(getResources().getString(R.string.ok),
                     new DialogInterface.OnClickListener() {
