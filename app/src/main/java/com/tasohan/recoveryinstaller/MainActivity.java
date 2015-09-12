@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        checkDevice();
+        //checkDevice();
         checkRootAccess();
         getRecoveryVers();
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_about) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
             builder1.setTitle(getResources().getString(R.string.action_about));
-            builder1.setMessage("App Version - 1.1\nRecovery Maintainer - Michael Di\nApp Maintainer - Avinaba Dalal");
+            builder1.setMessage("App Version - 1.1.1\nRecovery Maintainer - Michael Di\nApp Maintainer - Avinaba Dalal");
             builder1.setCancelable(true);
             builder1.setPositiveButton(getResources().getString(R.string.ok),
                     new DialogInterface.OnClickListener() {
