@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Recovery Installer</string>
 
-    <string name="hello_world">Hello world!</string>
+
     <string name="action_about">About</string>
     <string name="twrp_head">TeamWin Recovery Project</string>
     <string name="cwm_head">CWM Philz Touch Recovery</string>
@@ -31,9 +31,20 @@
     <string name="no_device_desc">This app is only for Sony Xperia L. Please don\'t use this app if you are on some other device.</string>
     <string name="section_recovery">RECOVERY</string>
     <string name="section_utility">UTILITIES</string>
+    <string name="section_contributors">CONTRIBUTORS</string>
+    <string name="section_app">APP</string>
     <string name="section_beta">BETA TESTING</string>
     <string name="no_beta">no test atm</string>
     <string name="no_beta_desc">No Beta Version Available</string>
     <string name="beta_desc">Beta Version Available</string>
     <string name="downloaded">Downloaded</string>
+    <string name="app_maintainer_label">App Maintainer</string>
+    <string name="app_maintainer">Avinaba Dalal</string>
+    <string name="recovery_maintainer_label">Recovery Maintainer</string>
+    <string name="recovery_maintainer">Michael Di</string>
+    <string name="icon_designer_label">App Maintainer</string>
+    <string name="icon_designer">Michal Štefan</string>
+    <string name="app_version_label">App Version</string>
+    <string name="app_date_label">Release Date</string>
+    <string name="app_date">6 June 2015</string>
 </resources>

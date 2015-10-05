@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout style="@style/info_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/section_contributors"
+            android:textSize="15sp"
+            android:textColor="@color/primary"
+            android:paddingTop="10dp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/primary"/>
+
+
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/app_maintainer_label" style="@style/info_label" />
+            <TextView android:text="@string/app_maintainer" style="@style/info_value" />
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/recovery_maintainer_label" style="@style/info_label" />
+            <TextView android:text="@string/recovery_maintainer" style="@style/info_value" />
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/icon_designer_label" style="@style/info_label" />
+            <TextView android:text="@string/icon_designer" style="@style/info_value" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/section_app"
+            android:textSize="15sp"
+            android:textColor="@color/primary"
+            android:paddingTop="10dp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/primary"/>
+
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/app_version_label" style="@style/info_label" />
+            <TextView android:id="@+id/app_version" style="@style/info_value" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/app_date_label" style="@style/info_label" />
+            <TextView android:text="@string/app_date" style="@style/info_value" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
