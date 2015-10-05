@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //checkDevice();
+        checkDevice();
         checkRootAccess();
         initCards();
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkDevice () {
         String dev = Build.MODEL;
-        if(dev.equals(getResources().getString(R.string.model_1)) || dev.equals(getResources().getString(R.string.model_2)) || dev.equals(getResources().getString(R.string.model_3)) || dev.toLowerCase().equals(getResources().getString(R.string.model_4))) {
+        if(dev.equals(getResources().getString(R.string.model_1)) || dev.equals(getResources().getString(R.string.model_2)) || dev.equals(getResources().getString(R.string.model_3)) || dev.toLowerCase().equals(getResources().getString(R.string.model_4)) || dev.equals(getResources().getString(R.string.model_5))) {
             //compatible device found.
         } else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
@@ -312,7 +312,6 @@ public class MainActivity extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
-                            finish();
                         }
                     });
             AlertDialog alert11 = builder1.create();
