@@ -34,4 +34,5 @@
     <string name="no_beta">no test atm</string>
     <string name="no_beta_desc">No Beta Version Available</string>
     <string name="beta_desc">Beta Version Available</string>
+    <string name="downloaded">Downloaded</string>
 </resources>
