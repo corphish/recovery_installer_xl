@@ -17,6 +17,7 @@ import org.apache.http.params.HttpParams;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -116,17 +117,31 @@ public class GetRecoveryVersion extends AsyncTask<String, Integer, String> {
         }
         }
 
-        if(pref.getString("recovery","").equals(recovery)) {
+
+
+        if(pref.getString("installed","").equals(recovery)) {
             status.setText(mContext.getResources().getString(R.string.installed));
             status.setTextColor(mContext.getResources().getColor(R.color.green));
-            if(!pref.getString("version","").equals(result) && result != null) {
+            if(!pref.getString("installed_version","").equals(result) && result != null) {
                 status.setText(mContext.getResources().getString(R.string.update));
                 status.setTextColor(mContext.getResources().getColor(R.color.blue));
             }
         } else {
-
-            status.setText(mContext.getResources().getString(R.string.not_installed));
             status.setTextColor(mContext.getResources().getColor(R.color.grey));
+            File file = new File("sdcard/fota" + recovery + ".img");
+            File aroma = new File("sdcard/aromafm.zip");
+            if (recovery.equals("aromafm")) {
+                if(aroma.exists())
+                    status.setText(mContext.getResources().getString(R.string.downloaded));
+                else
+                    status.setText(mContext.getResources().getString(R.string.not_installed));
+
+            } else {
+                if (file.exists())
+                    status.setText(mContext.getResources().getString(R.string.downloaded));
+                else
+                    status.setText(mContext.getResources().getString(R.string.not_installed));
+            }
         }
     }
 }

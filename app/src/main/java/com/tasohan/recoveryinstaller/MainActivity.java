@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //checkDevice();
         checkRootAccess();
-        getRecoveryVers();
+        initCards();
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
         final TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
         CardView card_cwm = (CardView)findViewById(R.id.card_view_cwm);
@@ -63,7 +63,23 @@ public class MainActivity extends AppCompatActivity {
         card_twrp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this, twrp_status, "twrp", editor, twrp_ver.getText().toString()).execute("");
+                File file = new File("sdcard/fotatwrp.img");
+                if(file.exists() && !twrp_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Flash Recovery")
+                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new FlashRecovery(MainActivity.this, twrp_status, "twrp", editor, twrp_ver.getText().toString()).execute("");
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                } else
+                    new DownloadTask(MainActivity.this, twrp_status, "twrp", editor, twrp_ver.getText().toString()).execute("");
 
             }
         });
@@ -72,7 +88,25 @@ public class MainActivity extends AppCompatActivity {
         card_cwm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this, cwm_status, "philz", editor, cwm_ver.getText().toString()).execute("");
+                File file = new File("sdcard/fotaphilz.img");
+                if(file.exists() && !cwm_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Flash Recovery")
+                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new FlashRecovery(MainActivity.this, cwm_status, "philz", editor, cwm_ver.getText().toString()).execute("");
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                } else
+                    new DownloadTask(MainActivity.this, cwm_status, "philz", editor, cwm_ver.getText().toString()).execute("");
+
+
             }
         });
         card_cot.setClickable(true);
@@ -80,6 +114,22 @@ public class MainActivity extends AppCompatActivity {
         card_cot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                File file = new File("sdcard/fotacot.img");
+                if(file.exists() && !cot_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Flash Recovery")
+                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new FlashRecovery(MainActivity.this, cwm_status, "cwm", editor, cwm_ver.getText().toString()).execute("");
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                } else
                 new DownloadTask(MainActivity.this, cot_status, "cot", editor, cot_ver.getText().toString()).execute("");
             }
         });
@@ -88,6 +138,22 @@ public class MainActivity extends AppCompatActivity {
         card_cm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                File file = new File("sdcard/fotacm.img");
+                if(file.exists() && !cm_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Flash Recovery")
+                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new FlashRecovery(MainActivity.this, cm_status, "cm", editor, cm_ver.getText().toString()).execute("");
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                } else
                 new DownloadTask(MainActivity.this, cm_status, "cm", editor, cm_ver.getText().toString()).execute("");
             }
         });
@@ -96,6 +162,22 @@ public class MainActivity extends AppCompatActivity {
         card_stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                File file = new File("sdcard/fotastock.img");
+                if(file.exists() && !stock_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Flash Recovery")
+                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new FlashRecovery(MainActivity.this, stock_status, "stock", editor, stock_ver.getText().toString()).execute("");
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                } else
                 new DownloadTask(MainActivity.this, stock_status, "stock", editor, stock_ver.getText().toString()).execute("");
             }
         });
@@ -104,6 +186,22 @@ public class MainActivity extends AppCompatActivity {
         card_aroma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                File file = new File("sdcard/aromafm.zip");
+                if(file.exists() && !aroma_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Flash Aroma File Manager")
+                            .setMessage("Are you sure you want to reboot to recovery and flash AromaFM?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new FlashRecovery(MainActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                } else
                 new DownloadTask(MainActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
             }
         });
@@ -115,14 +213,14 @@ public class MainActivity extends AppCompatActivity {
         card_beta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DownloadTask(MainActivity.this,beta_status,"beta", null, "").execute("");
+                new DownloadTask(MainActivity.this,beta_status,"beta", editor, "").execute("");
             }
         });
     }
 
 
 
-    public void getRecoveryVers () {
+    public void initCards () {
         TextView twrp_ver = (TextView)findViewById(R.id.twrp_version);
         TextView cwm_ver = (TextView)findViewById(R.id.cwm_version);
         TextView cot_ver = (TextView)findViewById(R.id.cot_version);
@@ -244,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_about) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
             builder1.setTitle(getResources().getString(R.string.action_about));
-            builder1.setMessage("App Version - 1.1.1\nRecovery Maintainer - Michael Di\nApp Maintainer - Avinaba Dalal");
+            builder1.setMessage("App Version - 1.2\nRecovery Maintainer - Michael Di\nApp Maintainer - Avinaba Dalal\nIcon Designer - Michal Štefan");
             builder1.setCancelable(true);
             builder1.setPositiveButton(getResources().getString(R.string.ok),
                     new DialogInterface.OnClickListener() {

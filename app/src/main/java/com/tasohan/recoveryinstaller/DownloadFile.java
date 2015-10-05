@@ -1,6 +1,8 @@
 package com.tasohan.recoveryinstaller;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -114,9 +116,25 @@ public class DownloadFile extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        if(result != null)
-            new FlashRecovery(mContext, status, recovery,pref, ver).execute("");
-        else {
+        if(result != null) {
+            status.setText(mContext.getResources().getString(R.string.downloaded));
+            pref.putString("recovery", recovery);
+            pref.putString("version", ver);
+            pref.commit();
+            new AlertDialog.Builder(mContext)
+                    .setTitle("Flash Recovery")
+                    .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            new FlashRecovery(mContext, status, recovery, pref, ver).execute("");
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).show();
+        } else {
             status.setTextColor(mContext.getResources().getColor(R.color.red));
             status.setText(mContext.getResources().getString(R.string.error));
         }

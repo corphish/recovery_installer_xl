@@ -3,6 +3,7 @@ package com.tasohan.recoveryinstaller;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.io.DataOutputStream;
@@ -83,8 +84,9 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
         super.onPostExecute(result);
         status.setText(c.getResources().getString(R.string.reboot));
         status.setTextColor(c.getResources().getColor(R.color.red));
-        pref.putString("recovery", rc);
-        pref.putString("version",ver);
+        Log.i("Flash Recovery","Installing" + rc);
+        pref.putString("installed", rc);
+        pref.putString("installed_version", ver);
         pref.commit();
     }
 }
