@@ -26,9 +26,9 @@
     <string name="model_2">C2105</string>
     <string name="model_3">SH36</string>
     <string name="model_4">taoshan</string>
-    <string name="model_5">xperia l</string>
+    <string name="model_5">Xperia L</string>
     <string name="no_device">Warning! Incompatible Device</string>
-    <string name="no_device_desc">This app is only for Sony Xperia L. Please don\'t use this app if you are on some other device.</string>
+    <string name="no_device_desc">This app is only for Sony Xperia L. Please don\'t use this app if you are on some other device. If you are on Sony Xperia L and still getting this message, ignore it.</string>
     <string name="section_recovery">RECOVERY</string>
     <string name="section_utility">UTILITIES</string>
     <string name="section_contributors">CONTRIBUTORS</string>
@@ -42,9 +42,9 @@
     <string name="app_maintainer">Avinaba Dalal</string>
     <string name="recovery_maintainer_label">Recovery Maintainer</string>
     <string name="recovery_maintainer">Michael Di</string>
-    <string name="icon_designer_label">App Maintainer</string>
+    <string name="icon_designer_label">Icon Designer</string>
     <string name="icon_designer">Michal Štefan</string>
     <string name="app_version_label">App Version</string>
     <string name="app_date_label">Release Date</string>
-    <string name="app_date">6 June 2015</string>
+    <string name="app_date">6 October 2015</string>
 </resources>
