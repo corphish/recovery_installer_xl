@@ -27,15 +27,12 @@ import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
 
-    public boolean is_stock = false;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rom_variant();
         checkDevice();
         checkRootAccess();
         initCards();
@@ -252,11 +249,6 @@ public class MainActivity extends AppCompatActivity {
         new GetRecoveryVersion(MainActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
         new GetRecoveryVersion(MainActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
         new GetRecoveryVersion(MainActivity.this,aroma_ver, aroma_status ,"aromafm", pref_aroma).execute("");
-    }
-
-    public void rom_variant() {
-        if(Build.VERSION.RELEASE.contains("4.1") || Build.VERSION.RELEASE.contains("4.2")) is_stock = true;
-
     }
 
     public void checkRootAccess () {
