@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -36,6 +37,7 @@ public class StockROMActivity extends AppCompatActivity {
         final TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
         final TextView aroma_ver = (TextView)findViewById(R.id.aroma_version);
         checkRootAccess();
+        checkDevice();
         init_cards();
         card_twrp.setClickable(true);
         card_twrp.setLongClickable(true);
@@ -270,6 +272,26 @@ public class StockROMActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void checkDevice () {
+        String dev = Build.MODEL;
+        if(dev.equals(getResources().getString(R.string.model_1)) || dev.equals(getResources().getString(R.string.model_2)) || dev.equals(getResources().getString(R.string.model_3)) || dev.toLowerCase().equals(getResources().getString(R.string.model_4)) || dev.equals(getResources().getString(R.string.model_5))) {
+            //compatible device found.
+        } else {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(StockROMActivity.this);
+            builder1.setTitle(getResources().getString(R.string.no_device));
+            builder1.setMessage(getResources().getString(R.string.no_device_desc));
+            builder1.setCancelable(false);
+            builder1.setPositiveButton(getResources().getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
     }
 
     @Override
