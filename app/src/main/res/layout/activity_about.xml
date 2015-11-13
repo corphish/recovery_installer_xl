@@ -20,7 +20,7 @@
             android:layout_height="1dp"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:background="@color/primary"/>
 
 
@@ -61,7 +61,7 @@
             android:layout_height="1dp"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:background="@color/primary"/>
 
         <LinearLayout style="@style/entry_layout">
