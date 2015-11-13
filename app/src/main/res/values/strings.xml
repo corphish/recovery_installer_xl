@@ -49,6 +49,9 @@
     <string name="recovery_maintainer">Michael Di</string>
     <string name="icon_designer_label">Icon Designer</string>
     <string name="icon_designer">Michal Štefan</string>
+    <string name="stock_recovery_label">Recovery for Stock by</string>
+    <string name="stock_recovery_maintainer1">Rachit Rawat</string>
+    <string name="stock_recovery_maintainer2">[NUT]</string>
     <string name="app_version_label">App Version</string>
     <string name="app_date_label">Release Date</string>
     <string name="app_date">13 November 2015</string>
