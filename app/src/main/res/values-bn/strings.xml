@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Recovery Installer</string>
+
+    <!--constants-->
+    <string name="twrp_head">TeamWin Recovery Project (TWRP)</string>
+    <string name="cwm_head">CWM Philz Touch Recovery</string>
+    <string name="cwm_label">ClockWorkMod (CWM) Recovery</string>
+    <string name="cot_head">Cannibal Open Touch Recovery</string>
+    <string name="cm_head">Cyanogen Recovery</string>
+    <string name="stock_head">Stock FOTAKernel</string>
+    <string name="aroma_head">AROMA File Manager</string>
+    <string name="model_1">C2104</string>
+    <string name="model_2">C2105</string>
+    <string name="model_3">SH36</string>
+    <string name="model_4">taoshan</string>
+    <string name="model_5">Xperia L</string>
+    <string name="no_beta">no test atm</string>
+    <string name="stock_twrp_ver">2.7.1.0</string>
+    <string name="stock_cwm_ver">6.0.5.0</string>
+    <string name="stock_philz_ver">6.47.6</string>
+    <string name="stock_aroma_ver">2.0.0.0.7</string>
+    <string name="app_maintainer">Avinaba Dalal</string>
+    <string name="recovery_maintainer">Michael Di</string>
+    <string name="icon_designer">Michal Štefan</string>
+    <string name="stock_recovery_maintainer1">Rachit Rawat</string>
+    <string name="stock_recovery_maintainer2">[NUT]</string>
+    <string name="app_date">13 November 2015</string>
+
+    <!--translatable-->
+    <string name="action_about">তথ্য</string>
+    <string name="install">ইনস্টল</string>
+    <string name="not_installed">ইনস্টল করা হয় নি</string>
+    <string name="installed">ইনস্টল করা হয়েছে</string>
+    <string name="installing">ইনস্টল হচ্ছে</string>
+    <string name="unknown">অজানা</string>
+    <string name="fetch_version">লোড হচ্ছে...</string>
+    <string name="error">ত্রুটি ঘটেছে</string>
+    <string name="reboot">পুনরায় বুট হচ্ছে..</string>
+    <string name="downloading">ডাউনলোড হচ্ছে</string>
+    <string name="update">আপডেট উপলব্ধ আছে!</string>
+    <string name="no_root">Root- র অধিকারপ্রাপ্ত নেই</string>
+    <string name="no_root_desc">অ্যাপ এই অ্যাপ্লিকেশন সঠিকভাবে কাজ করার জন্য প্রয়োজনীয় যা root- র অধিকারপ্রাপ্ত, অর্জন করতে পারে. Root- র অধিকারপ্রাপ্ত প্রদান এবং অ্যাপ্লিকেশন পুনরায় আরম্ভ করুন.</string>
+    <string name="ok">ঠিক আছে</string>
+    <string name="no_device">সতর্কবাণী! বেমানান ডিভাইস</string>
+    <string name="no_device_desc">এই app টি আপনি কিছু অন্য ডিভাইসে যদি সনি এক্সপেরিয়া এল এই অ্যাপ্লিকেশন ব্যবহার করবেন না দয়া করে শুধুমাত্র. আপনি সনি এক্সপেরিয়া এল হয় এবং এখনও এই বার্তা পেয়ে থাকে, তা উপেক্ষা.</string>
+    <string name="section_recovery">রিকভারি</string>
+    <string name="section_utility">ইউটিলিটি</string>
+    <string name="section_contributors">অংশদাতা</string>
+    <string name="section_app">অ্যাপ্লিকেশন</string>
+    <string name="section_beta">বিটা টেস্টিং</string>
+    <string name="no_beta_desc">প্রাপ্তিসাধ্য কোন বেটা সংস্করণ</string>
+    <string name="beta_desc">উপলভ্য বেটা সংস্করণ</string>
+    <string name="downloaded">ডাউনলোড করা হয়েছে</string>
+    <string name="app_maintainer_label">অ্যাপ রক্ষণাবেক্ষণকারী</string>
+    <string name="recovery_maintainer_label">রিকভারি রক্ষণাবেক্ষণকারী</string>
+    <string name="icon_designer_label">আইকন ডিজাইনার</string>
+    <string name="stock_recovery_label">স্টক জন্য রিকভারি করে :</string>
+    <string name="app_version_label">অ্যাপ সংস্করণ</string>
+    <string name="app_date_label">মুক্তির তারিখ</string>
+    <string name="flash_recovery_head">ফ্ল্যাশ রিকভারি</string>
+    <string name="flash_recovery_msg">আপনি যদি আপনি সদ্যঃ ডাউনলোড রিকভারি ফ্ল্যাশ এবং পুনরুদ্ধারের পুনরায় বুট করার ব্যাপারে নিশ্চিত?</string>
+    <string name="flash_aroma_head">ফ্ল্যাশ Aroma ফাইল ম্যানেজার?</string>
+    <string name="flash_aroma_msg">যদি আপনি পুনরুদ্ধারের পুনরায় বুট করুন এবং AromaFM ফ্ল্যাশ করার ব্যাপারে নিশ্চিত?</string>
+    <string name="yes">হাঁ</string>
+    <string name="no">না</string>
+</resources>
