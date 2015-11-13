@@ -27,9 +27,12 @@ public class StockROMActivity extends AppCompatActivity {
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
         CardView card_philz = (CardView)findViewById(R.id.card_view_philz);
         CardView card_cwm = (CardView)findViewById(R.id.card_view_cwm);
+        CardView card_aroma = (CardView)findViewById(R.id.card_view_aroma);
         final TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
         final TextView philz_status = (TextView)findViewById(R.id.philz_status);
         final TextView cwm_status = (TextView)findViewById(R.id.cwm_status);
+        final TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
+        final TextView aroma_ver = (TextView)findViewById(R.id.aroma_version);
         init_cards();
         card_twrp.setClickable(true);
         card_twrp.setLongClickable(true);
@@ -133,6 +136,31 @@ public class StockROMActivity extends AppCompatActivity {
 
             }
         });
+        final SharedPreferences.Editor editor_aroma = getSharedPreferences("aroma",MODE_PRIVATE).edit();
+        card_aroma.setClickable(true);
+        card_aroma.setLongClickable(true);
+        card_aroma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File file = new File("sdcard/aromafm.zip");
+                if(file.exists() && !aroma_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                    new AlertDialog.Builder(StockROMActivity.this)
+                            .setTitle("Flash Aroma File Manager")
+                            .setMessage("Are you sure you want to reboot to recovery and flash AromaFM?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new FlashRecovery(StockROMActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                } else
+                    new DownloadTask(StockROMActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
+            }
+        });
 
 
     }
@@ -156,11 +184,12 @@ public class StockROMActivity extends AppCompatActivity {
     }
 
     public void init_cards() {
-        String[] files = {"sdcard/twrp.tar","sdcard/cwm.tar","sdcard/philz.tar"};
+        String[] files = {"sdcard/twrp.tar","sdcard/cwm.tar","sdcard/philz.tar","sdcard/aromafm.zip"};
         File file;
         final TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
         final TextView philz_status = (TextView)findViewById(R.id.philz_status);
         final TextView cwm_status = (TextView)findViewById(R.id.cwm_status);
+        final TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
         file = new File(files[0]);
         if(file.exists() && file_checklist())
             twrp_status.setText(R.string.downloaded);
@@ -170,6 +199,9 @@ public class StockROMActivity extends AppCompatActivity {
         file = new File(files[1]);
         if(file.exists() && file_checklist())
             cwm_status.setText(R.string.downloaded);
+        file = new File(files[3]);
+        if(file.exists() && file_checklist())
+            aroma_status.setText(R.string.downloaded);
 
         SharedPreferences pref = getSharedPreferences("recovery",MODE_PRIVATE);
         if(pref.getString("recovery","").equals("twrp")) {
