@@ -122,14 +122,14 @@ public class DownloadFile extends AsyncTask<String, Integer, String> {
             pref.putString("version", ver);
             pref.commit();
             new AlertDialog.Builder(mContext)
-                    .setTitle("Flash Recovery")
-                    .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setTitle(mContext.getResources().getString(R.string.flash_recovery_head))
+                    .setMessage(mContext.getResources().getString(R.string.flash_recovery_msg))
+                    .setPositiveButton(mContext.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             new FlashRecovery(mContext, status, recovery, pref, ver).execute("");
                         }
                     })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(mContext.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
                         }

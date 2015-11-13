@@ -47,14 +47,14 @@ public class StockROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/twrp.tar");
                 if(file.exists() && file_checklist()) {
                     new AlertDialog.Builder(StockROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashStockRecovery(StockROMActivity.this,twrp_status,"twrp").execute();
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -81,14 +81,14 @@ public class StockROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/cwm.tar");
                 if(file.exists() && file_checklist()) {
                     new AlertDialog.Builder(StockROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashStockRecovery(StockROMActivity.this,cwm_status,"cwm").execute();
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -115,14 +115,14 @@ public class StockROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/philz.tar");
                 if(file.exists() && file_checklist()) {
                     new AlertDialog.Builder(StockROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashStockRecovery(StockROMActivity.this,philz_status,"philz").execute();
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -150,14 +150,14 @@ public class StockROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/aromafm.zip");
                 if(file.exists() && !aroma_status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(StockROMActivity.this)
-                            .setTitle("Flash Aroma File Manager")
-                            .setMessage("Are you sure you want to reboot to recovery and flash AromaFM?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_aroma_head))
+                            .setMessage(getResources().getString(R.string.flash_aroma_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashRecovery(StockROMActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }

@@ -63,14 +63,14 @@ public class CustomROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/fotatwrp.img");
                 if(file.exists() && !twrp_status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashRecovery(CustomROMActivity.this, twrp_status, "twrp", editor, twrp_ver.getText().toString()).execute("");
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -88,14 +88,14 @@ public class CustomROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/fotaphilz.img");
                 if(file.exists() && !cwm_status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashRecovery(CustomROMActivity.this, cwm_status, "philz", editor, cwm_ver.getText().toString()).execute("");
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -114,14 +114,14 @@ public class CustomROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/fotacot.img");
                 if(file.exists() && !cot_status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashRecovery(CustomROMActivity.this, cwm_status, "cwm", editor, cwm_ver.getText().toString()).execute("");
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -138,14 +138,14 @@ public class CustomROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/fotacm.img");
                 if(file.exists() && !cm_status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashRecovery(CustomROMActivity.this, cm_status, "cm", editor, cm_ver.getText().toString()).execute("");
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -162,14 +162,14 @@ public class CustomROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/fotastock.img");
                 if(file.exists() && !stock_status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle("Flash Recovery")
-                            .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_recovery_head))
+                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashRecovery(CustomROMActivity.this, stock_status, "stock", editor, stock_ver.getText().toString()).execute("");
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
@@ -186,14 +186,14 @@ public class CustomROMActivity extends AppCompatActivity {
                 File file = new File("sdcard/aromafm.zip");
                 if(file.exists() && !aroma_status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle("Flash Aroma File Manager")
-                            .setMessage("Are you sure you want to reboot to recovery and flash AromaFM?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(getResources().getString(R.string.flash_aroma_head))
+                            .setMessage(getResources().getString(R.string.flash_aroma_msg))
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     new FlashRecovery(CustomROMActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }

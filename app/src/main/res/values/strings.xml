@@ -57,4 +57,10 @@
     <string name="stock_recovery_label">Recovery for Stock by</string>
     <string name="app_version_label">App Version</string>
     <string name="app_date_label">Release Date</string>
+    <string name="flash_recovery_head">Flash Recovery</string>
+    <string name="flash_recovery_msg">Are you sure you want to flash the newly downloaded recovery and reboot to recovery?</string>
+    <string name="flash_aroma_head">Flash Aroma File Manager</string>
+    <string name="flash_aroma_msg">Are you sure you want to reboot to recovery and flash AromaFM?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

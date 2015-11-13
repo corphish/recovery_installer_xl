@@ -109,9 +109,9 @@ public class DownloadStockFile extends AsyncTask<String, Integer, String> {
             mStatus.setText(mContext.getResources().getString(R.string.downloaded));
             if (mFilename.contains("tar")) /*lolz */ {
                 new AlertDialog.Builder(mContext)
-                        .setTitle("Flash Recovery")
-                        .setMessage("Are you sure you want to flash the newly downloaded recovery and reboot to recovery?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setTitle(mContext.getResources().getString(R.string.flash_recovery_head))
+                        .setMessage(mContext.getResources().getString(R.string.flash_recovery_msg))
+                        .setPositiveButton(mContext.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String recovery="";
                                 if(mFilename.contains("twrp"))
@@ -123,7 +123,7 @@ public class DownloadStockFile extends AsyncTask<String, Integer, String> {
                                 new FlashStockRecovery(mContext,mStatus,recovery).execute();
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(mContext.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 
                             }
