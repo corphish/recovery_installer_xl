@@ -1,11 +1,33 @@
 <resources>
     <string name="app_name">Recovery Installer</string>
 
-
-    <string name="action_about">About</string>
+    <!--constants-->
     <string name="twrp_head">TeamWin Recovery Project (TWRP)</string>
     <string name="cwm_head">CWM Philz Touch Recovery</string>
     <string name="cwm_label">ClockWorkMod (CWM) Recovery</string>
+    <string name="cot_head">Cannibal Open Touch Recovery</string>
+    <string name="cm_head">Cyanogen Recovery</string>
+    <string name="stock_head">Stock FOTAKernel</string>
+    <string name="aroma_head">AROMA File Manager</string>
+    <string name="model_1">C2104</string>
+    <string name="model_2">C2105</string>
+    <string name="model_3">SH36</string>
+    <string name="model_4">taoshan</string>
+    <string name="model_5">Xperia L</string>
+    <string name="no_beta">no test atm</string>
+    <string name="stock_twrp_ver">2.7.1.0</string>
+    <string name="stock_cwm_ver">6.0.5.0</string>
+    <string name="stock_philz_ver">6.47.6</string>
+    <string name="stock_aroma_ver">2.0.0.0.7</string>
+    <string name="app_maintainer">Avinaba Dalal</string>
+    <string name="recovery_maintainer">Michael Di</string>
+    <string name="icon_designer">Michal Štefan</string>
+    <string name="stock_recovery_maintainer1">Rachit Rawat</string>
+    <string name="stock_recovery_maintainer2">[NUT]</string>
+    <string name="app_date">13 November 2015</string>
+
+    <!--translatable-->
+    <string name="action_about">About</string>
     <string name="install">INSTALL</string>
     <string name="not_installed">Not Installed</string>
     <string name="installed">Installed</string>
@@ -16,18 +38,9 @@
     <string name="reboot">Rebooting..</string>
     <string name="downloading">Downloading</string>
     <string name="update">Update Available!</string>
-    <string name="cot_head">Cannibal Open Touch Recovery</string>
-    <string name="cm_head">Cyanogen Recovery</string>
-    <string name="stock_head">Stock FOTAKernel</string>
-    <string name="aroma_head">AROMA File Manager</string>
     <string name="no_root">No Root Access</string>
     <string name="no_root_desc">The App could not acquire root access, which is necessary for this app to function properly. Please grant root access and restart app.</string>
     <string name="ok">OK</string>
-    <string name="model_1">C2104</string>
-    <string name="model_2">C2105</string>
-    <string name="model_3">SH36</string>
-    <string name="model_4">taoshan</string>
-    <string name="model_5">Xperia L</string>
     <string name="no_device">Warning! Incompatible Device</string>
     <string name="no_device_desc">This app is only for Sony Xperia L. Please don\'t use this app if you are on some other device. If you are on Sony Xperia L and still getting this message, ignore it.</string>
     <string name="section_recovery">RECOVERY</string>
@@ -35,24 +48,13 @@
     <string name="section_contributors">CONTRIBUTORS</string>
     <string name="section_app">APP</string>
     <string name="section_beta">BETA TESTING</string>
-    <string name="no_beta">no test atm</string>
     <string name="no_beta_desc">No Beta Version Available</string>
     <string name="beta_desc">Beta Version Available</string>
-    <string name="stock_twrp_ver">2.7.1.0</string>
-    <string name="stock_cwm_ver">6.0.5.0</string>
-    <string name="stock_philz_ver">6.47.6</string>
-    <string name="stock_aroma_ver">2.0.0.0.7</string>
     <string name="downloaded">Downloaded</string>
     <string name="app_maintainer_label">App Maintainer</string>
-    <string name="app_maintainer">Avinaba Dalal</string>
     <string name="recovery_maintainer_label">Recovery Maintainer</string>
-    <string name="recovery_maintainer">Michael Di</string>
     <string name="icon_designer_label">Icon Designer</string>
-    <string name="icon_designer">Michal Štefan</string>
     <string name="stock_recovery_label">Recovery for Stock by</string>
-    <string name="stock_recovery_maintainer1">Rachit Rawat</string>
-    <string name="stock_recovery_maintainer2">[NUT]</string>
     <string name="app_version_label">App Version</string>
     <string name="app_date_label">Release Date</string>
-    <string name="app_date">13 November 2015</string>
 </resources>
