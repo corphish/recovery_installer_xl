@@ -38,9 +38,9 @@
     <string name="no_beta">no test atm</string>
     <string name="no_beta_desc">No Beta Version Available</string>
     <string name="beta_desc">Beta Version Available</string>
-    <string name="stock_twrp_ver">Unknown</string>
+    <string name="stock_twrp_ver">2.7.1.0</string>
     <string name="stock_cwm_ver">6.0.5.0</string>
-    <string name="stock_philz_ver">Unknown</string>
+    <string name="stock_philz_ver">6.47.6</string>
     <string name="downloaded">Downloaded</string>
     <string name="app_maintainer_label">App Maintainer</string>
     <string name="app_maintainer">Avinaba Dalal</string>
@@ -50,5 +50,5 @@
     <string name="icon_designer">Michal Štefan</string>
     <string name="app_version_label">App Version</string>
     <string name="app_date_label">Release Date</string>
-    <string name="app_date">6 October 2015</string>
+    <string name="app_date">13 November 2015</string>
 </resources>
