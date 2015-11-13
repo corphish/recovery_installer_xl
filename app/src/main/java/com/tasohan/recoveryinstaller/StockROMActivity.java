@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * Created by Avinaba on 11/12/2015.
@@ -33,6 +35,7 @@ public class StockROMActivity extends AppCompatActivity {
         final TextView cwm_status = (TextView)findViewById(R.id.cwm_status);
         final TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
         final TextView aroma_ver = (TextView)findViewById(R.id.aroma_version);
+        checkRootAccess();
         init_cards();
         card_twrp.setClickable(true);
         card_twrp.setLongClickable(true);
@@ -217,6 +220,55 @@ public class StockROMActivity extends AppCompatActivity {
             philz_status.setText(R.string.installed);
         }
         Log.d("Init","Pref - "+ pref.getString("recovery",""));
+
+    }
+
+    public void checkRootAccess () {
+        Runtime runtime = Runtime.getRuntime();
+        Process proc = null;
+        OutputStreamWriter osw = null;
+
+        try {
+            proc = runtime.exec("su");
+            osw = new OutputStreamWriter(proc.getOutputStream());
+
+        } catch (IOException ex) {
+            Log.e("execCommandLine()", "Command resulted in an IO Exception: ");
+
+            finish();
+            return;
+        } finally {
+            if (osw != null) {
+                try {
+                    osw.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+
+        try {
+            proc.waitFor();
+        } catch (InterruptedException e) {
+        }
+
+        if (proc.exitValue() != 0) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(StockROMActivity.this);
+            builder1.setTitle(getResources().getString(R.string.no_root));
+            builder1.setMessage(getResources().getString(R.string.no_root_desc));
+            builder1.setCancelable(false);
+            builder1.setPositiveButton(getResources().getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            finish();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }  else {
+            //Toast.makeText(this, "Root Access Granted", Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
