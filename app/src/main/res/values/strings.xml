@@ -3,9 +3,9 @@
 
 
     <string name="action_about">About</string>
-    <string name="twrp_head">TeamWin Recovery Project</string>
+    <string name="twrp_head">TeamWin Recovery Project (TWRP)</string>
     <string name="cwm_head">CWM Philz Touch Recovery</string>
-    <string name="cwm_label">ClockWorkMod Recovery</string>
+    <string name="cwm_label">ClockWorkMod (CWM) Recovery</string>
     <string name="install">INSTALL</string>
     <string name="not_installed">Not Installed</string>
     <string name="installed">Installed</string>
