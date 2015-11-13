@@ -27,6 +27,16 @@
             android:label="About">
 
         </activity>
+        <activity
+            android:name=".CustomROMActivity"
+            android:label="Recovery Installer">
+
+        </activity>
+        <activity
+            android:name=".StockROMActivity"
+            android:label="Recovery Installer">
+
+        </activity>
     </application>
 
 </manifest>
