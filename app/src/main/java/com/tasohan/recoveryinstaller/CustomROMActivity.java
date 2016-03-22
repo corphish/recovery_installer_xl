@@ -22,13 +22,31 @@ import java.io.OutputStreamWriter;
 public class CustomROMActivity extends AppCompatActivity {
 
     public boolean is_stock = false;
-
+    public boolean isDonate = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
+        if(isDonate) {
+            SharedPreferences pref = getSharedPreferences("donate",MODE_PRIVATE);
+            if(pref.getBoolean("shown",false) == false) {
+                    new AlertDialog.Builder(CustomROMActivity.this)
+                            .setTitle(getResources().getString(R.string.donate_title))
+                            .setMessage(getResources().getString(R.string.donate_msg))
+                            .setPositiveButton(getResources().getString(R.string.ok),
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    }).show();
+                    SharedPreferences.Editor editor = getSharedPreferences("donate", MODE_PRIVATE).edit();
+                    editor.putBoolean("shown", true);
+                    editor.commit();
+
+            }
+        }
         checkDevice();
         checkRootAccess();
         initCards();

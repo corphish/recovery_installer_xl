@@ -63,4 +63,6 @@
     <string name="flash_aroma_msg">যদি আপনি পুনরুদ্ধারের পুনরায় বুট করুন এবং AromaFM ফ্ল্যাশ করার ব্যাপারে নিশ্চিত?</string>
     <string name="yes">হাঁ</string>
     <string name="no">না</string>
+    <string name="donate_title">অনুদান সংস্করণ</string>
+    <string name="donate_msg">এই প্রকল্পের জন্য আপনার সমর্থন অ্যাপ্লিকেশন দান সংস্করণ ক্রয়, এবং দেখাচ্ছে জন্য আপনাকে ধন্যবাদ </string>
 </resources>

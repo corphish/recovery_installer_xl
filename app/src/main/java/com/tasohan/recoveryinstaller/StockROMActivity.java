@@ -2,6 +2,7 @@ package com.tasohan.recoveryinstaller;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,10 +24,29 @@ import java.io.OutputStreamWriter;
  * Created by Avinaba on 11/12/2015.
  */
 public class StockROMActivity extends AppCompatActivity {
+    public boolean isDonate = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
+        if(isDonate) {
+            SharedPreferences pref = getSharedPreferences("donate",MODE_PRIVATE);
+            if(pref.getBoolean("shown",false) == false) {
+                new AlertDialog.Builder(StockROMActivity.this)
+                        .setTitle(getResources().getString(R.string.donate_title))
+                        .setMessage(getResources().getString(R.string.donate_msg))
+                        .setPositiveButton(getResources().getString(R.string.ok),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                }).show();
+                SharedPreferences.Editor editor = getSharedPreferences("donate", MODE_PRIVATE).edit();
+                editor.putBoolean("shown", true);
+                editor.commit();
+
+            }
+        }
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
         CardView card_philz = (CardView)findViewById(R.id.card_view_philz);
         CardView card_cwm = (CardView)findViewById(R.id.card_view_cwm);
