@@ -51,6 +51,8 @@ public class GetRecoveryVersion extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... sUrl) {
+        if(recovery.equals("twrp"))
+            return com.tasohan.recoveryinstaller.TWRPUtils.GetString.getLatestVersion();
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();
