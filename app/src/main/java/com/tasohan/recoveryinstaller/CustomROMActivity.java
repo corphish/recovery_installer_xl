@@ -1,11 +1,14 @@
 package com.tasohan.recoveryinstaller;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +27,7 @@ public class CustomROMActivity extends AppCompatActivity {
 
     public boolean is_stock = false;
     public boolean isDonate = false;
+    public String LOG_TAG = "RecoveryInstaller";
 
 
     @Override
@@ -48,6 +53,7 @@ public class CustomROMActivity extends AppCompatActivity {
             }
         }
         checkDevice();
+        getStoragePerms();
         checkRootAccess();
         initCards();
         CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
@@ -98,6 +104,31 @@ public class CustomROMActivity extends AppCompatActivity {
 
             }
         });
+        card_twrp.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final File file = new File("sdcard/fotatwrp.img");
+                if(file.exists()) {
+                    new AlertDialog.Builder(CustomROMActivity.this)
+                            .setTitle(getResources().getString(R.string.delete_head))
+                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    file.delete();
+                                }
+                            })
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                } else {
+                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
         card_cwm.setClickable(true);
         card_cwm.setLongClickable(true);
         card_cwm.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +155,31 @@ public class CustomROMActivity extends AppCompatActivity {
 
             }
         });
+        card_cwm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final File file = new File("sdcard/fotaphilz.img");
+                if(file.exists()) {
+                    new AlertDialog.Builder(CustomROMActivity.this)
+                            .setTitle(getResources().getString(R.string.delete_head))
+                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    file.delete();
+                                }
+                            })
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                } else {
+                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
         card_cot.setClickable(true);
         card_cot.setLongClickable(true);
         card_cot.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +202,31 @@ public class CustomROMActivity extends AppCompatActivity {
                             }).show();
                 } else
                 new DownloadTask(CustomROMActivity.this, cot_status, "cot", editor, cot_ver.getText().toString()).execute("");
+            }
+        });
+        card_cot.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final File file = new File("sdcard/fotacot.img");
+                if(file.exists()) {
+                    new AlertDialog.Builder(CustomROMActivity.this)
+                            .setTitle(getResources().getString(R.string.delete_head))
+                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    file.delete();
+                                }
+                            })
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                } else {
+                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
+                }
+                return false;
             }
         });
         card_cm.setClickable(true);
@@ -172,6 +253,31 @@ public class CustomROMActivity extends AppCompatActivity {
                 new DownloadTask(CustomROMActivity.this, cm_status, "cm", editor, cm_ver.getText().toString()).execute("");
             }
         });
+        card_cm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final File file = new File("sdcard/fotacm.img");
+                if(file.exists()) {
+                    new AlertDialog.Builder(CustomROMActivity.this)
+                            .setTitle(getResources().getString(R.string.delete_head))
+                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    file.delete();
+                                }
+                            })
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                } else {
+                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
         card_stock.setClickable(true);
         card_stock.setLongClickable(true);
         card_stock.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +300,31 @@ public class CustomROMActivity extends AppCompatActivity {
                             }).show();
                 } else
                 new DownloadTask(CustomROMActivity.this, stock_status, "stock", editor, stock_ver.getText().toString()).execute("");
+            }
+        });
+        card_stock.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final File file = new File("sdcard/fotastock.img");
+                if(file.exists()) {
+                    new AlertDialog.Builder(CustomROMActivity.this)
+                            .setTitle(getResources().getString(R.string.delete_head))
+                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    file.delete();
+                                }
+                            })
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                } else {
+                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
+                }
+                return false;
             }
         });
         card_aroma.setClickable(true);
@@ -220,6 +351,31 @@ public class CustomROMActivity extends AppCompatActivity {
                 new DownloadTask(CustomROMActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
             }
         });
+        card_aroma.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final File file = new File("sdcard/aromafm.zip");
+                if(file.exists()) {
+                    new AlertDialog.Builder(CustomROMActivity.this)
+                            .setTitle(getResources().getString(R.string.delete_head))
+                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    file.delete();
+                                }
+                            })
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                } else {
+                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
         card_beta.setClickable(true);
         card_beta.setLongClickable(true);
         final TextView beta_name = (TextView)findViewById(R.id.textView_beta_head);
@@ -231,6 +387,32 @@ public class CustomROMActivity extends AppCompatActivity {
                 new DownloadTask(CustomROMActivity.this,beta_status,"beta", editor, "").execute("");
             }
         });
+    }
+
+    public void getStoragePerms() {
+        Log.i(LOG_TAG,"Requesting Permissions");
+        if(Build.VERSION.SDK_INT >= 23) {
+            String[] perm = {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                // Proceed without doing anything
+            } else {
+                ActivityCompat.requestPermissions(this,perm,1);
+
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        Log.i(LOG_TAG,"Request Code - " + requestCode);
+        if(grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            Log.i(LOG_TAG,"Got permissions. Proceeding!");
+        } else {
+            Log.i(LOG_TAG,"Could not get required permissions. Proceeding anyway!");
+        }
+
     }
 
 
