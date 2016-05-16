@@ -63,6 +63,7 @@
     <string name="flash_aroma_msg">Are you sure you want to reboot to recovery and flash AromaFM?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="delete_head">Delete downloaded recovery?</string>
     <string name="donate_title">Donate Version</string>
     <string name="donate_msg">Thank you for purchasing the donation version of the app, and showing your support for this project.</string>
 </resources>
