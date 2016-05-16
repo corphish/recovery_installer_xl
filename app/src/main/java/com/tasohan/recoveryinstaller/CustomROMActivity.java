@@ -18,9 +18,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tasohan.recoveryinstaller.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+
 
 
 public class CustomROMActivity extends AppCompatActivity {
@@ -129,7 +132,7 @@ public class CustomROMActivity extends AppCompatActivity {
                             .setMessage(getResources().getString(R.string.flash_aroma_msg))
                             .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    new FlashRecovery(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
+                                    new com.tasohan.recoveryinstaller.FlashRecovery(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
                                 }
                             })
                             .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -138,7 +141,7 @@ public class CustomROMActivity extends AppCompatActivity {
                                 }
                             }).show();
                 } else
-                    new DownloadTask(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
+                    new com.tasohan.recoveryinstaller.DownloadTask(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
             }
         });
     }
@@ -200,13 +203,14 @@ public class CustomROMActivity extends AppCompatActivity {
 
 
     public void initCards () {
+
         /* Get Recovery versions for each recovery at first */
-        new GetRecoveryVersion(CustomROMActivity.this,twrp_ver, twrp_status ,"twrp", pref).execute("");
-        new GetRecoveryVersion(CustomROMActivity.this,cwm_ver, cwm_status ,"philz", pref).execute("");
-        new GetRecoveryVersion(CustomROMActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
-        new GetRecoveryVersion(CustomROMActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
-        new GetRecoveryVersion(CustomROMActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
-        new GetRecoveryVersion(CustomROMActivity.this,aroma_ver, aroma_status ,"aromafm", pref_aroma).execute("");
+        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,twrp_ver, twrp_status ,"twrp", pref).execute("");
+        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,cwm_ver, cwm_status ,"philz", pref).execute("");
+        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
+        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
+        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
+        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,aroma_ver, aroma_status ,"aromafm", pref_aroma).execute("");
 
         /* Make the cardviews functional */
         /* Part 1: Handle single taps*/
