@@ -29,6 +29,36 @@ public class CustomROMActivity extends AppCompatActivity {
     public boolean isDonate = false;
     public String LOG_TAG = "RecoveryInstaller";
 
+    // Element declarations
+    TextView twrp_status = null;
+    TextView cwm_status = null;
+    TextView cot_status = null;
+    TextView cm_status = null;
+    TextView stock_status = null;
+    TextView aroma_status = null;
+    TextView beta_status = null;
+    TextView twrp_ver = null;
+    TextView cwm_ver = null;
+    TextView cot_ver = null;
+    TextView cm_ver = null;
+    TextView stock_ver = null;
+    TextView aroma_ver = null;
+    TextView beta_ver = null;
+
+    CardView card_beta = null;
+    CardView card_aroma = null;
+    CardView card_stock = null;
+    CardView card_cm = null;
+    CardView card_cot = null;
+    CardView card_cwm = null;
+    CardView card_twrp = null;
+
+
+    SharedPreferences.Editor editor = null;
+    SharedPreferences.Editor editor_aroma = null;
+    SharedPreferences pref = null;
+    SharedPreferences pref_aroma = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,294 +82,54 @@ public class CustomROMActivity extends AppCompatActivity {
 
             }
         }
+
+        // Assign the declared views
+        card_twrp = (CardView)findViewById(R.id.card_view_twrp);
+        twrp_status = (TextView)findViewById(R.id.twrp_status);
+        card_cwm = (CardView)findViewById(R.id.card_view_cwm);
+        cwm_status = (TextView)findViewById(R.id.cwm_status);
+        card_cot = (CardView)findViewById(R.id.card_view_cot);
+        cot_status = (TextView)findViewById(R.id.cot_status);
+        card_cm = (CardView)findViewById(R.id.card_view_cm);
+        cm_status = (TextView)findViewById(R.id.cm_status);
+        card_stock = (CardView)findViewById(R.id.card_view_stock);
+        stock_status = (TextView)findViewById(R.id.stock_status);
+        card_aroma = (CardView)findViewById(R.id.card_view_aroma);
+        aroma_status = (TextView)findViewById(R.id.aroma_status);
+        card_beta = (CardView)findViewById(R.id.card_view_beta);
+        beta_status = (TextView)findViewById(R.id.beta_status);
+        editor = getSharedPreferences("recovery", MODE_PRIVATE).edit();
+        editor_aroma = getSharedPreferences("aroma", MODE_PRIVATE).edit();
+        twrp_ver = (TextView)findViewById(R.id.twrp_version);
+        cwm_ver = (TextView)findViewById(R.id.cwm_version);
+        cot_ver = (TextView)findViewById(R.id.cot_version);
+        cm_ver = (TextView)findViewById(R.id.cm_version);
+        stock_ver = (TextView)findViewById(R.id.stock_version);
+        aroma_ver = (TextView)findViewById(R.id.aroma_version);
+        beta_ver = (TextView)findViewById(R.id.beta_version);
+        pref = getSharedPreferences("recovery", MODE_PRIVATE);
+        pref_aroma = getSharedPreferences("aroma", MODE_PRIVATE);
+
+
         checkDevice();
         getStoragePerms();
         checkRootAccess();
         initCards();
-        CardView card_twrp = (CardView)findViewById(R.id.card_view_twrp);
-        final TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
-        CardView card_cwm = (CardView)findViewById(R.id.card_view_cwm);
-        final TextView cwm_status = (TextView)findViewById(R.id.cwm_status);
-        CardView card_cot = (CardView)findViewById(R.id.card_view_cot);
-        final TextView cot_status = (TextView)findViewById(R.id.cot_status);
-        CardView card_cm = (CardView)findViewById(R.id.card_view_cm);
-        final TextView cm_status = (TextView)findViewById(R.id.cm_status);
-        CardView card_stock = (CardView)findViewById(R.id.card_view_stock);
-        final TextView stock_status = (TextView)findViewById(R.id.stock_status);
-        CardView card_aroma = (CardView)findViewById(R.id.card_view_aroma);
-        final TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
-        final CardView card_beta = (CardView)findViewById(R.id.card_view_beta);
-        final TextView beta_status = (TextView)findViewById(R.id.beta_status);
-        final SharedPreferences.Editor editor = getSharedPreferences("recovery", MODE_PRIVATE).edit();
-        final SharedPreferences.Editor editor_aroma = getSharedPreferences("aroma", MODE_PRIVATE).edit();
-        final TextView twrp_ver = (TextView)findViewById(R.id.twrp_version);
-        final TextView cwm_ver = (TextView)findViewById(R.id.cwm_version);
-        final TextView cot_ver = (TextView)findViewById(R.id.cot_version);
-        final TextView cm_ver = (TextView)findViewById(R.id.cm_version);
-        final TextView stock_ver = (TextView)findViewById(R.id.stock_version);
-        final TextView aroma_ver = (TextView)findViewById(R.id.aroma_version);
-        final TextView beta_ver = (TextView)findViewById(R.id.beta_version);
-        card_twrp.setClickable(true);
-        card_twrp.setLongClickable(true);
-        card_twrp.setOnClickListener(new View.OnClickListener() {
+
+    }
+
+    public void card_setOnClickListener(CardView card, final TextView status, final String filename, final String recovery_key, final String recovery_version, final SharedPreferences.Editor editor) {
+        card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file = new File("sdcard/fotatwrp.img");
-                if(file.exists() && !twrp_status.getText().toString().equals(getResources().getString(R.string.update))) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.flash_recovery_head))
-                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    new FlashRecovery(CustomROMActivity.this, twrp_status, "twrp", editor, twrp_ver.getText().toString()).execute("");
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-                } else
-                    new DownloadTask(CustomROMActivity.this, twrp_status, "twrp", editor, twrp_ver.getText().toString()).execute("");
-
-            }
-        });
-        card_twrp.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final File file = new File("sdcard/fotatwrp.img");
-                if(file.exists()) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.delete_head))
-                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    file.delete();
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-
-                } else {
-                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
-        card_cwm.setClickable(true);
-        card_cwm.setLongClickable(true);
-        card_cwm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File("sdcard/fotaphilz.img");
-                if(file.exists() && !cwm_status.getText().toString().equals(getResources().getString(R.string.update))) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.flash_recovery_head))
-                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    new FlashRecovery(CustomROMActivity.this, cwm_status, "philz", editor, cwm_ver.getText().toString()).execute("");
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-                } else
-                    new DownloadTask(CustomROMActivity.this, cwm_status, "philz", editor, cwm_ver.getText().toString()).execute("");
-
-
-            }
-        });
-        card_cwm.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final File file = new File("sdcard/fotaphilz.img");
-                if(file.exists()) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.delete_head))
-                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    file.delete();
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-
-                } else {
-                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
-        card_cot.setClickable(true);
-        card_cot.setLongClickable(true);
-        card_cot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File("sdcard/fotacot.img");
-                if(file.exists() && !cot_status.getText().toString().equals(getResources().getString(R.string.update))) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.flash_recovery_head))
-                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    new FlashRecovery(CustomROMActivity.this, cwm_status, "cwm", editor, cwm_ver.getText().toString()).execute("");
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-                } else
-                new DownloadTask(CustomROMActivity.this, cot_status, "cot", editor, cot_ver.getText().toString()).execute("");
-            }
-        });
-        card_cot.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final File file = new File("sdcard/fotacot.img");
-                if(file.exists()) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.delete_head))
-                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    file.delete();
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-
-                } else {
-                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
-        card_cm.setClickable(true);
-        card_cm.setLongClickable(true);
-        card_cm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File("sdcard/fotacm.img");
-                if(file.exists() && !cm_status.getText().toString().equals(getResources().getString(R.string.update))) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.flash_recovery_head))
-                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    new FlashRecovery(CustomROMActivity.this, cm_status, "cm", editor, cm_ver.getText().toString()).execute("");
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-                } else
-                new DownloadTask(CustomROMActivity.this, cm_status, "cm", editor, cm_ver.getText().toString()).execute("");
-            }
-        });
-        card_cm.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final File file = new File("sdcard/fotacm.img");
-                if(file.exists()) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.delete_head))
-                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    file.delete();
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-
-                } else {
-                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
-        card_stock.setClickable(true);
-        card_stock.setLongClickable(true);
-        card_stock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File("sdcard/fotastock.img");
-                if(file.exists() && !stock_status.getText().toString().equals(getResources().getString(R.string.update))) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.flash_recovery_head))
-                            .setMessage(getResources().getString(R.string.flash_recovery_msg))
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    new FlashRecovery(CustomROMActivity.this, stock_status, "stock", editor, stock_ver.getText().toString()).execute("");
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-                } else
-                new DownloadTask(CustomROMActivity.this, stock_status, "stock", editor, stock_ver.getText().toString()).execute("");
-            }
-        });
-        card_stock.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final File file = new File("sdcard/fotastock.img");
-                if(file.exists()) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.delete_head))
-                            .setMessage("Are you sure to delete " + file.getAbsolutePath() + "?")
-                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    file.delete();
-                                }
-                            })
-                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-
-                } else {
-                    Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
-        card_aroma.setClickable(true);
-        card_aroma.setLongClickable(true);
-        card_aroma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File("sdcard/aromafm.zip");
-                if(file.exists() && !aroma_status.getText().toString().equals(getResources().getString(R.string.update))) {
+                File file = new File("/sdcard"+filename);
+                if(file.exists() && !status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
                             .setTitle(getResources().getString(R.string.flash_aroma_head))
                             .setMessage(getResources().getString(R.string.flash_aroma_msg))
                             .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    new FlashRecovery(CustomROMActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
+                                    new FlashRecovery(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
                                 }
                             })
                             .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -348,13 +138,16 @@ public class CustomROMActivity extends AppCompatActivity {
                                 }
                             }).show();
                 } else
-                new DownloadTask(CustomROMActivity.this, aroma_status, "aromafm", editor_aroma, aroma_ver.getText().toString()).execute("");
+                    new DownloadTask(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
             }
         });
-        card_aroma.setOnLongClickListener(new View.OnLongClickListener() {
+    }
+
+    public void card_setOnLongClickListener(CardView card, final String filename) {
+        card.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                final File file = new File("sdcard/aromafm.zip");
+                final File file = new File("/sdcard/"+filename);
                 if(file.exists()) {
                     new AlertDialog.Builder(CustomROMActivity.this)
                             .setTitle(getResources().getString(R.string.delete_head))
@@ -374,17 +167,6 @@ public class CustomROMActivity extends AppCompatActivity {
                     Toast.makeText(CustomROMActivity.this,"Nothing to do!",Toast.LENGTH_SHORT).show();
                 }
                 return false;
-            }
-        });
-        card_beta.setClickable(true);
-        card_beta.setLongClickable(true);
-        final TextView beta_name = (TextView)findViewById(R.id.textView_beta_head);
-        final TextView beta_head = (TextView)findViewById(R.id.textView_section_beta);
-        final View view = (View)findViewById(R.id.view_section_beta);
-        card_beta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DownloadTask(CustomROMActivity.this,beta_status,"beta", editor, "").execute("");
             }
         });
     }
@@ -418,33 +200,30 @@ public class CustomROMActivity extends AppCompatActivity {
 
 
     public void initCards () {
-        TextView twrp_ver = (TextView)findViewById(R.id.twrp_version);
-        TextView cwm_ver = (TextView)findViewById(R.id.cwm_version);
-        TextView cot_ver = (TextView)findViewById(R.id.cot_version);
-        TextView cm_ver = (TextView)findViewById(R.id.cm_version);
-        TextView stock_ver = (TextView)findViewById(R.id.stock_version);
-        TextView aroma_ver = (TextView)findViewById(R.id.aroma_version);
-        SharedPreferences pref = getSharedPreferences("recovery", MODE_PRIVATE);
-        SharedPreferences pref_aroma = getSharedPreferences("aroma", MODE_PRIVATE);
-        TextView twrp_status = (TextView)findViewById(R.id.twrp_status);
-        TextView cwm_status = (TextView)findViewById(R.id.cwm_status);
-        TextView cot_status = (TextView)findViewById(R.id.cot_status);
-        TextView cm_status = (TextView)findViewById(R.id.cm_status);
-        TextView stock_status = (TextView)findViewById(R.id.stock_status);
-        TextView aroma_status = (TextView)findViewById(R.id.aroma_status);
-        final TextView beta_name = (TextView)findViewById(R.id.textView_beta_head);
-        final TextView beta_head = (TextView)findViewById(R.id.textView_section_beta);
-        final View view = (View)findViewById(R.id.view_section_beta);
-        final CardView card_beta = (CardView)findViewById(R.id.card_view_beta);
-        final TextView beta_status = (TextView)findViewById(R.id.beta_status);
-        final TextView beta_ver = (TextView)findViewById(R.id.beta_version);
-        new GetBetaName(CustomROMActivity.this, card_beta, view, beta_head, beta_name, beta_ver, beta_status).execute("");
+        /* Get Recovery versions for each recovery at first */
         new GetRecoveryVersion(CustomROMActivity.this,twrp_ver, twrp_status ,"twrp", pref).execute("");
         new GetRecoveryVersion(CustomROMActivity.this,cwm_ver, cwm_status ,"philz", pref).execute("");
         new GetRecoveryVersion(CustomROMActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
         new GetRecoveryVersion(CustomROMActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
         new GetRecoveryVersion(CustomROMActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
         new GetRecoveryVersion(CustomROMActivity.this,aroma_ver, aroma_status ,"aromafm", pref_aroma).execute("");
+
+        /* Make the cardviews functional */
+        /* Part 1: Handle single taps*/
+        card_setOnClickListener(card_twrp,twrp_status,"fotatwrp.img","twrp",twrp_ver.getText().toString(),editor);
+        card_setOnClickListener(card_cwm,cwm_status,"fotaphilz.img","philz",cwm_ver.getText().toString(),editor);
+        card_setOnClickListener(card_cot,cot_status,"fotacot.img","cot",cot_ver.getText().toString(),editor);
+        card_setOnClickListener(card_cm,cm_status,"fotacm.img","cm",cm_ver.getText().toString(),editor);
+        card_setOnClickListener(card_stock,stock_status,"fotastock.img","stock",stock_ver.getText().toString(),editor);
+        card_setOnClickListener(card_aroma,aroma_status,"aromafm.zip","aromafm",aroma_ver.getText().toString(),editor_aroma);
+
+        /* Part 2: Handle long taps */
+        card_setOnLongClickListener(card_twrp,"fotatwrp.img");
+        card_setOnLongClickListener(card_cwm,"fotaphilz.img");
+        card_setOnLongClickListener(card_cot,"fotacot.img");
+        card_setOnLongClickListener(card_cm,"fotacm.img");
+        card_setOnLongClickListener(card_stock,"fotastock.img");
+        card_setOnLongClickListener(card_aroma,"aromafm.zip");
     }
 
 
