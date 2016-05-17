@@ -112,8 +112,8 @@ public class DownloadStockFile extends AsyncTask<String, Integer, String> {
             mStatus.setText(mContext.getResources().getString(R.string.downloaded));
             if (mFilename.contains("tar")) /*lolz */ {
                 new AlertDialog.Builder(mContext)
-                        .setTitle(mContext.getResources().getString(R.string.flash_recovery_head))
-                        .setMessage(mContext.getResources().getString(R.string.flash_recovery_msg))
+                        .setTitle(mContext.getResources().getString(R.string.flash_head))
+                        .setMessage(mContext.getResources().getString(R.string.flash_msg))
                         .setPositiveButton(mContext.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String recovery="";
