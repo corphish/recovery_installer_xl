@@ -1,10 +1,12 @@
-package com.tasohan.recoveryinstaller;
+package com.tasohan.recoveryinstaller.FlashUtils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.tasohan.recoveryinstaller.R;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,11 +16,12 @@ import java.io.OutputStreamWriter;
  * Created by Avinaba on 8/26/2015.
  */
 public class FlashRecovery extends AsyncTask<String, Integer, String> {
-    private TextView status;
-    private SharedPreferences.Editor pref;
-    private Context c;
-    String rc;
-    String ver;
+    private TextView status = null;
+    private SharedPreferences.Editor pref = null;
+    private Context c = null;
+    String rc = null;
+    String ver = null;
+    String path = null;
 
     public FlashRecovery(Context context, TextView textView, String Recovery, SharedPreferences.Editor sharedPref, String v) {
         c = context;
@@ -26,12 +29,21 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
         pref = sharedPref;
         rc = Recovery;
         ver = v;
+        path = "/sdcard/fota"+rc+".img";
+    }
+    public FlashRecovery(Context context,String rec,SharedPreferences.Editor ed) {
+        c = context;
+        rc = rec;
+        pref = ed;
+        path = rc;
     }
 
     protected void onPreExecute() {
         super.onPreExecute();
-        status.setText(c.getResources().getString(R.string.installing));
-        status.setTextColor(c.getResources().getColor(R.color.grey));
+        if(status != null) {
+            status.setText(c.getResources().getString(R.string.installing));
+            status.setTextColor(c.getResources().getColor(R.color.grey));
+        }
     }
 
     @Override
@@ -51,7 +63,7 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
         }
         else {
             String cmd[] = {"su",
-                    "dd if=sdcard/fota" + rc + ".img of=/dev/block/platform/msm_sdcc.1/by-name/FOTAKernel",
+                    "dd if="+path + " of=/dev/block/platform/msm_sdcc.1/by-name/FOTAKernel",
             };
             cmds = cmd;
         }
@@ -75,18 +87,24 @@ public class FlashRecovery extends AsyncTask<String, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        status.setText(c.getResources().getString(R.string.installing));
-        status.setTextColor(c.getResources().getColor(R.color.black));
+        if(status != null) {
+            status.setText(c.getResources().getString(R.string.installing));
+            status.setTextColor(c.getResources().getColor(R.color.black));
+        }
     }
 
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        status.setText(c.getResources().getString(R.string.reboot));
-        status.setTextColor(c.getResources().getColor(R.color.red));
-        Log.i("Flash Recovery","Installing" + rc);
-        pref.putString("installed", rc);
-        pref.putString("installed_version", ver);
-        pref.commit();
+        if(status != null) {
+            status.setText(c.getResources().getString(R.string.reboot));
+            status.setTextColor(c.getResources().getColor(R.color.red));
+        }
+        Log.i("Flash Recovery","Installing " + rc);
+        if(pref != null) {
+            pref.putString("installed", rc);
+            pref.putString("installed_version", ver);
+            pref.commit();
+        }
     }
 }

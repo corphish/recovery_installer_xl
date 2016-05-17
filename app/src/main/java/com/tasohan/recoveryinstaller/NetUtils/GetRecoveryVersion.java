@@ -1,10 +1,12 @@
-package com.tasohan.recoveryinstaller;
+package com.tasohan.recoveryinstaller.NetUtils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.tasohan.recoveryinstaller.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -51,8 +53,6 @@ public class GetRecoveryVersion extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... sUrl) {
-        if(recovery.equals("twrp"))
-            return com.tasohan.recoveryinstaller.TWRPUtils.GetString.getLatestVersion();
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();

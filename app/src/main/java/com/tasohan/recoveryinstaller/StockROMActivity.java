@@ -16,6 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tasohan.recoveryinstaller.FlashUtils.FlashRecovery;
+import com.tasohan.recoveryinstaller.FlashUtils.FlashStockRecovery;
+import com.tasohan.recoveryinstaller.NetUtils.DownloadStockFile;
+import com.tasohan.recoveryinstaller.NetUtils.DownloadTask;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;

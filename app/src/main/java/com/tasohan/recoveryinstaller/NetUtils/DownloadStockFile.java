@@ -1,4 +1,4 @@
-package com.tasohan.recoveryinstaller;
+package com.tasohan.recoveryinstaller.NetUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.tasohan.recoveryinstaller.FlashUtils.FlashStockRecovery;
+import com.tasohan.recoveryinstaller.R;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;

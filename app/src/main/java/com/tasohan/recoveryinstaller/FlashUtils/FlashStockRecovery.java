@@ -1,4 +1,4 @@
-package com.tasohan.recoveryinstaller;
+package com.tasohan.recoveryinstaller.FlashUtils;
 
 import android.os.AsyncTask;
 import android.content.Context;

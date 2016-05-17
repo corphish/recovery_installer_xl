@@ -1,10 +1,12 @@
-package com.tasohan.recoveryinstaller;
+package com.tasohan.recoveryinstaller.NetUtils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.tasohan.recoveryinstaller.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,6 +31,7 @@ public class DownloadTask  extends AsyncTask<String, Integer, String> {
     String recovery;
     private SharedPreferences.Editor pref;
     String ver;
+    public String LOG_TAG = "GetDownloadURL";
 
     public DownloadTask(Context context,TextView textView_version, String rec, SharedPreferences.Editor sharedPref, String v) {
         mContext = context;
@@ -75,10 +78,10 @@ public class DownloadTask  extends AsyncTask<String, Integer, String> {
                 this.publishProgress();
             }
             String result = total.toString();
-            Log.i("Get URL", "Downloaded string: " + result);
+            Log.i(LOG_TAG, "Downloaded string: " + result);
             return result;
         } catch (Exception e) {
-            Log.e("Get Url", "Error in downloading: " + e.toString());
+            Log.e(LOG_TAG, "Error in downloading: " + e.toString());
         }
 
         return null;

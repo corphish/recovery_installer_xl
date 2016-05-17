@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -18,12 +19,19 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.nbsp.materialfilepicker.MaterialFilePicker;
+import com.nbsp.materialfilepicker.MaterialFilePicker;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.tasohan.recoveryinstaller.*;
+import com.tasohan.recoveryinstaller.FlashUtils.FlashRecovery;
+import com.tasohan.recoveryinstaller.NetUtils.DownloadFile;
+import com.tasohan.recoveryinstaller.NetUtils.DownloadTask;
+import com.tasohan.recoveryinstaller.NetUtils.GetRecoveryVersion;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-
+import java.util.regex.Pattern;
 
 
 public class CustomROMActivity extends AppCompatActivity {
@@ -31,6 +39,7 @@ public class CustomROMActivity extends AppCompatActivity {
     public boolean is_stock = false;
     public boolean isDonate = false;
     public String LOG_TAG = "RecoveryInstaller";
+
 
     // Element declarations
     TextView twrp_status = null;
@@ -99,8 +108,6 @@ public class CustomROMActivity extends AppCompatActivity {
         stock_status = (TextView)findViewById(R.id.stock_status);
         card_aroma = (CardView)findViewById(R.id.card_view_aroma);
         aroma_status = (TextView)findViewById(R.id.aroma_status);
-        card_beta = (CardView)findViewById(R.id.card_view_beta);
-        beta_status = (TextView)findViewById(R.id.beta_status);
         editor = getSharedPreferences("recovery", MODE_PRIVATE).edit();
         editor_aroma = getSharedPreferences("aroma", MODE_PRIVATE).edit();
         twrp_ver = (TextView)findViewById(R.id.twrp_version);
@@ -109,7 +116,6 @@ public class CustomROMActivity extends AppCompatActivity {
         cm_ver = (TextView)findViewById(R.id.cm_version);
         stock_ver = (TextView)findViewById(R.id.stock_version);
         aroma_ver = (TextView)findViewById(R.id.aroma_version);
-        beta_ver = (TextView)findViewById(R.id.beta_version);
         pref = getSharedPreferences("recovery", MODE_PRIVATE);
         pref_aroma = getSharedPreferences("aroma", MODE_PRIVATE);
 
@@ -125,14 +131,23 @@ public class CustomROMActivity extends AppCompatActivity {
         card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file = new File("/sdcard"+filename);
+                File file = new File("/sdcard/"+filename);
                 if(file.exists() && !status.getText().toString().equals(getResources().getString(R.string.update))) {
                     new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.flash_aroma_head))
-                            .setMessage(getResources().getString(R.string.flash_aroma_msg))
+                            .setTitle(getResources().getString(R.string.flash_head))
+                            .setMessage(getResources().getString(R.string.flash_msg))
                             .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    new com.tasohan.recoveryinstaller.FlashRecovery(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
+                                    String temp_rec = recovery_version;
+                                    Log.i(LOG_TAG,"Got recovery version " + temp_rec);
+                                    if(recovery_version.equals(getResources().getString(R.string.fetch_version)) || recovery_version.equals(getResources().getString(R.string.unknown))) {
+                                        Log.wtf(LOG_TAG,"Improper recovery version. Trying to fix it.");
+                                        /* Fatal situation, put proper recovery version instead */
+                                        SharedPreferences preferences = getSharedPreferences("local_recovery",MODE_PRIVATE);
+                                        temp_rec = preferences.getString(recovery_key,null);
+                                        Log.i(LOG_TAG,"Tried to fix it. New version " + temp_rec);
+                                    }
+                                    new FlashRecovery(CustomROMActivity.this, status, recovery_key, editor, temp_rec).execute("");
                                 }
                             })
                             .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -140,13 +155,14 @@ public class CustomROMActivity extends AppCompatActivity {
 
                                 }
                             }).show();
-                } else
-                    new com.tasohan.recoveryinstaller.DownloadTask(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
+                } else {
+                        new DownloadTask(CustomROMActivity.this, status, recovery_key, editor, recovery_version).execute("");
+                }
             }
         });
     }
 
-    public void card_setOnLongClickListener(CardView card, final String filename) {
+    public void card_setOnLongClickListener(CardView card, final String filename, final TextView status) {
         card.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -158,6 +174,7 @@ public class CustomROMActivity extends AppCompatActivity {
                             .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     file.delete();
+                                    status.setText(getResources().getString(R.string.not_installed));
                                 }
                             })
                             .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -205,12 +222,12 @@ public class CustomROMActivity extends AppCompatActivity {
     public void initCards () {
 
         /* Get Recovery versions for each recovery at first */
-        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,twrp_ver, twrp_status ,"twrp", pref).execute("");
-        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,cwm_ver, cwm_status ,"philz", pref).execute("");
-        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
-        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
-        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
-        new com.tasohan.recoveryinstaller.GetRecoveryVersion(CustomROMActivity.this,aroma_ver, aroma_status ,"aromafm", pref_aroma).execute("");
+        new GetRecoveryVersion(CustomROMActivity.this,twrp_ver, twrp_status ,"twrp", pref).execute("");
+        new GetRecoveryVersion(CustomROMActivity.this,cwm_ver, cwm_status ,"philz", pref).execute("");
+        new GetRecoveryVersion(CustomROMActivity.this,cot_ver, cot_status ,"cot", pref).execute("");
+        new GetRecoveryVersion(CustomROMActivity.this,cm_ver, cm_status ,"cm", pref).execute("");
+        new GetRecoveryVersion(CustomROMActivity.this,stock_ver, stock_status ,"stock", pref).execute("");
+        new GetRecoveryVersion(CustomROMActivity.this,aroma_ver, aroma_status ,"aromafm", pref_aroma).execute("");
 
         /* Make the cardviews functional */
         /* Part 1: Handle single taps*/
@@ -222,12 +239,12 @@ public class CustomROMActivity extends AppCompatActivity {
         card_setOnClickListener(card_aroma,aroma_status,"aromafm.zip","aromafm",aroma_ver.getText().toString(),editor_aroma);
 
         /* Part 2: Handle long taps */
-        card_setOnLongClickListener(card_twrp,"fotatwrp.img");
-        card_setOnLongClickListener(card_cwm,"fotaphilz.img");
-        card_setOnLongClickListener(card_cot,"fotacot.img");
-        card_setOnLongClickListener(card_cm,"fotacm.img");
-        card_setOnLongClickListener(card_stock,"fotastock.img");
-        card_setOnLongClickListener(card_aroma,"aromafm.zip");
+        card_setOnLongClickListener(card_twrp,"fotatwrp.img",twrp_status);
+        card_setOnLongClickListener(card_cwm,"fotaphilz.img",cwm_status);
+        card_setOnLongClickListener(card_cot,"fotacot.img",cot_status);
+        card_setOnLongClickListener(card_cm,"fotacm.img",cm_status);
+        card_setOnLongClickListener(card_stock,"fotastock.img",stock_status);
+        card_setOnLongClickListener(card_aroma,"aromafm.zip",aroma_status);
     }
 
 
@@ -326,7 +343,44 @@ public class CustomROMActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if (id == R.id.action_custom_flash) {
+
+            new MaterialFilePicker()
+                    .withActivity(this)
+                    .withRequestCode(1)
+                    .withFilter(Pattern.compile(".*\\.img$")) // Filtering files and directories by file name using regexp
+                    .withRootPath("/storage")
+                    .withHiddenFiles(false) // Show hidden files and folders
+                    .start();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            final String filePath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+            Log.i(LOG_TAG,"Got filepath - " + filePath);
+            new AlertDialog.Builder(this)
+                           .setTitle("Flash Custom Recovery")
+                           .setMessage("Are you sure to flash " + filePath + " to recovery partition?")
+                           .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                               @Override
+                               public void onClick(DialogInterface dialogInterface, int i) {
+
+                               }
+                           })
+                           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    new FlashRecovery(CustomROMActivity.this,filePath,editor).execute();
+                                }
+                            }).show();
+        }
+    }
+
+
 }
