@@ -22,10 +22,13 @@
     <string name="recovery_maintainer">Michael Di</string>
     <string name="stock_recovery_maintainer1">Rachit Rawat</string>
     <string name="stock_recovery_maintainer2">[NUT]</string>
-    <string name="app_date">13 November 2015</string>
+    <string name="app_date">18 May 2016</string>	
+    <string name="file_picker_app_label">Material File Picker</string>
+    <string name="file_picker_app_source">https://github.com/nbsp-team/MaterialFilePicker</string>
 
     <!--translatable-->
-    <string name="action_about">Hakkında</string>
+    <string name="action_about">Hakkında</string>	
+    <string name="action_custom_flash">Flaş Özel Kurtarma</string>
     <string name="install">Kur</string>
     <string name="not_installed">Kurulmadı</string>
     <string name="installed">Kuruldu</string>
@@ -55,6 +58,11 @@
     <string name="stock_recovery_label">Fabrika Kurtarma Kerneli by</string>
     <string name="app_version_label">Uygulama Sürümü</string>
     <string name="app_date_label">Çıkış Tarihi</string>
+    <string name="flash_head">flaş Kurtarma</string>
+    <string name="flash_msg">Eğer yeni indirilen dosyayı flaş ve kurtarma yeniden başlatmak istediğinizden emin misiniz?</string>
+	<string name="delete_head">İndirilen kurtarma silinsin mi?</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
+    <string name="donate_title">Sürüm bağış</string>
+    <string name="donate_msg">Bu proje için destek uygulaması bağış sürümünü satın ve gösterdiğiniz için teşekkür ederim.</string>
 </resources>
