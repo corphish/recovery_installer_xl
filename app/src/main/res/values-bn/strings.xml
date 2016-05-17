@@ -14,14 +14,12 @@
     <string name="model_3">SH36</string>
     <string name="model_4">taoshan</string>
     <string name="model_5">Xperia L</string>
-    <string name="no_beta">no test atm</string>
     <string name="stock_twrp_ver">2.7.1.0</string>
     <string name="stock_cwm_ver">6.0.5.0</string>
     <string name="stock_philz_ver">6.47.6</string>
     <string name="stock_aroma_ver">2.0.0.0.7</string>
     <string name="app_maintainer">Avinaba Dalal</string>
     <string name="recovery_maintainer">Michael Di</string>
-    <string name="icon_designer">Michal Štefan</string>
     <string name="stock_recovery_maintainer1">Rachit Rawat</string>
     <string name="stock_recovery_maintainer2">[NUT]</string>
     <string name="app_date">13 November 2015</string>
