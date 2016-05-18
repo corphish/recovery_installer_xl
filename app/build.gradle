@@ -12,8 +12,7 @@ buildscript {
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-    useLibrary  'org.apache.http.legacy'
-
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.tasohan.recoveryinstaller"
         minSdkVersion 16
@@ -27,12 +26,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-	lintOptions {
+    lintOptions {
         abortOnError false
     }
-    sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/java/FlashUtils','src/main/java/NetUtils','src/main/java/TWRPUtils'] } }
-
-
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/java/FlashUtils', 'src/main/java/NetUtils', 'src/main/java/TWRPUtils']
+        }
+    }
+    productFlavors {
+        donate {
+            minSdkVersion 16
+            applicationId 'com.taoshan.recoveryinstaller.donate'
+            targetSdkVersion 23
+            versionCode 7
+            versionName '1.4'
+        }
+        free {
+            minSdkVersion 16
+            applicationId 'com.taoshan.recoveryinstaller.free'
+            targetSdkVersion 23
+            versionCode 7
+            versionName '1.4'
+        }
+    }
 }
 
 dependencies {

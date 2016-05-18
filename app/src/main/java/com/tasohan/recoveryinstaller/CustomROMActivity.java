@@ -37,7 +37,6 @@ import java.util.regex.Pattern;
 public class CustomROMActivity extends AppCompatActivity {
 
     public boolean is_stock = false;
-    public boolean isDonate = false;
     public String LOG_TAG = "RecoveryInstaller";
 
 
@@ -76,24 +75,6 @@ public class CustomROMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
-        if(isDonate) {
-            SharedPreferences pref = getSharedPreferences("donate",MODE_PRIVATE);
-            if(pref.getBoolean("shown",false) == false) {
-                    new AlertDialog.Builder(CustomROMActivity.this)
-                            .setTitle(getResources().getString(R.string.donate_title))
-                            .setMessage(getResources().getString(R.string.donate_msg))
-                            .setPositiveButton(getResources().getString(R.string.ok),
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    }).show();
-                    SharedPreferences.Editor editor = getSharedPreferences("donate", MODE_PRIVATE).edit();
-                    editor.putBoolean("shown", true);
-                    editor.commit();
-
-            }
-        }
 
         // Assign the declared views
         card_twrp = (CardView)findViewById(R.id.card_view_twrp);
@@ -124,7 +105,29 @@ public class CustomROMActivity extends AppCompatActivity {
         getStoragePerms();
         checkRootAccess();
         initCards();
+        show_donate_msg();
 
+    }
+
+    public void show_donate_msg() {
+        if(BuildConfig.FLAVOR.equals("donate")) {
+            SharedPreferences pref = getSharedPreferences("donate",MODE_PRIVATE);
+            if(pref.getBoolean("shown",false) == false) {
+                new AlertDialog.Builder(CustomROMActivity.this)
+                        .setTitle(getResources().getString(R.string.donate_title))
+                        .setMessage(getResources().getString(R.string.donate_msg))
+                        .setPositiveButton(getResources().getString(R.string.ok),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                }).show();
+                SharedPreferences.Editor editor = getSharedPreferences("donate", MODE_PRIVATE).edit();
+                editor.putBoolean("shown", true);
+                editor.commit();
+
+            }
+        }
     }
 
     public void card_setOnClickListener(CardView card, final TextView status, final String filename, final String recovery_key, final String recovery_version, final SharedPreferences.Editor editor) {

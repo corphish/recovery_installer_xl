@@ -29,12 +29,11 @@ import java.io.OutputStreamWriter;
  * Created by Avinaba on 11/12/2015.
  */
 public class StockROMActivity extends AppCompatActivity {
-    public boolean isDonate = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
-        if(isDonate) {
+        if(BuildConfig.FLAVOR.equals("donate")) {
             SharedPreferences pref = getSharedPreferences("donate",MODE_PRIVATE);
             if(pref.getBoolean("shown",false) == false) {
                 new AlertDialog.Builder(StockROMActivity.this)
